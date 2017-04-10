@@ -1,0 +1,52 @@
+.iconpad
+    /*width 100%*/
+    .icon
+        margin auto
+        width w(10)
+        height h(10)
+
+//input, .button
+    /*width 100%*/
+    /*padding 0*/
+
+//input
+//    background-color: color-back
+//    color: color
+//    outline: 0
+//    padding: w(1)
+//    width 80%
+//    height h(14)
+//    font inherit
+//    margin: w(2)
+//    position: relative;
+//    box-sizing border-box
+//    outline: none;
+//    border: none;
+//    background: bottom left linear-gradient(color, color) no-repeat, bottom center linear-gradient(color, color) repeat-x, bottom right linear-gradient(color, color) no-repeat;
+//    background-size: w(0.5) w(3), w(0.5) w(0.5), w(0.5) w(3)
+//
+//input:hover, input:focus
+//    background: bottom left linear-gradient(accent-color, accent-color) no-repeat, bottom center linear-gradient(accent-color, accent-color) repeat-x, bottom right linear-gradient(accent-color, accent-color) no-repeat;
+//    background-size: w(0.5) w(3), w(0.5) w(0.5), w(0.5) w(3)
+
+
+vert-align()
+    position relative
+    top 50%
+    transform translateY(-50%)
+
+
+.inset
+    background-color theme-background-transparent
+    position absolute
+    top h(0)
+    height h(100)
+    left w(10)
+    width w(80)
+    #icon-cross
+        position absolute
+        top 0
+        right 0
+
+.text span:empty:before
+    content "\200b"

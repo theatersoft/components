@@ -1,0 +1,52 @@
+// blue-grey/amber material theme
+color-primary = palette-blue-grey-500
+color-primary-dark = palette-blue-grey-700
+color-primary-light = palette-blue-grey-100
+color-accent = palette-amber-500
+// dark theme palette
+theme-text = color-white
+theme-status-bar = color-black
+theme-app-bar = palette-grey-900
+theme-background = rgb(30,30,30)
+theme-dialog = palette-grey-800
+
+theme-background-transparent = rgba(theme-background, 0.8)
+color-accent-transparent = rgba(palette-amber-500, 0.8)
+
+// OLD
+color = palette-grey-300
+color-text = color-white
+//color-background = rgba(darken(color-accent,85%),0.8)
+
+//color-back = rgba(darken(color-accent,85%),0.8)
+color-focus = lighten(color,100%)
+//color-focus-back = rgba(lighten(color-accent,30%),0.8)
+/*inverse-color = #00000*/
+/*accent-color = #FFCC00*/
+
+@font-face
+    font-family 'Alegreya Sans SC'
+    font-style normal
+    font-weight 400
+    src url(/res/alegreyasanssc.ttf)
+
+text()
+    font-size 8rem
+    font-family Alegreya Sans SC
+
+//h1, h2, h3
+//    /*text3d(theme-color)*/
+//    -webkit-margin-before: 0
+//    -webkit-margin-after: 0
+
+
+animation-duration = .35s
+animation-delay = animation-duration / 5
+animation-curve-fast-out-slow-in = cubic-bezier(0.4, 0, 0.2, 1)
+animation-curve-linear-out-slow-in = cubic-bezier(0, 0, 0.2, 1)
+animation-curve-fast-out-linear-in = cubic-bezier(0.4, 0, 1, 1)
+animation-curve-default = animation-curve-fast-out-slow-in
+
+material-animation-default(duration)
+    transition-timing-function animation-curve-default
+    transition-duration duration

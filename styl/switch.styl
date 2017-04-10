@@ -1,0 +1,75 @@
+sw-unit = 2.4rem
+sw-color = color-accent
+//sw-text-color = color-black
+sw-thumb-off-color= palette-grey-50
+sw-track-on-color= rgba(color-accent, 0.5)
+sw-track-off-color= darken(color,0.5)
+sw-off-ripple-color= rgba(color-black, 0.4) 
+sw-on-focus-color= rgba(color-primary, 0.26) 
+sw-off-focus-color= rgba(color-black, 0.1) 
+//sw-disabled-thumb-color= $palette-grey-400
+sw-disabled-track-color= rgba(color-black, 0.12) 
+sw-disabled-text-color= rgba(color-black, 0.26) 
+sw-total-height= 2.4 * sw-unit 
+sw-track-length= 3.8 * sw-unit
+sw-track-height= 1.4 * sw-unit 
+sw-thumb-size = 2 * sw-unit
+sw-thumb-on-color= sw-color 
+sw-focus-init-size= .8 * sw-unit 
+sw-focus-size= sw-total-height * 2 
+sw-focus-diff= (sw-focus-size - sw-focus-init-size)/2
+sw-ripple-duration= 550ms
+//sw-font-size= $font-size-small 
+sw-field-margin-bottom= 1.5 * sw-unit 
+
+.field
+    position relative
+    display block
+    height auto
+    white-space nowrap
+    vertical-align middle
+switch()
+     position relative
+     display inline-block
+     width sw-track-length
+     height sw-track-height
+     margin-top ((sw-total-height - sw-track-height) / 2)
+     vertical-align top
+     cursor pointer
+     border-radius 4rem
+thumb-focus()
+     position absolute
+     top 50%
+     left 50%
+     box-sizing border-box
+     display inline-block
+     width 8rem
+     height 8rem
+     content ""
+     background-color transparent
+     border-radius 50%
+     transform translate((- sw-focus-init-size/2), (- sw-focus-init-size/2))
+.sw
+    .thumb
+        material-animation-default(0.2s)
+        position absolute
+        top ((sw-track-height - sw-thumb-size)/2)
+        width sw-thumb-size
+        height sw-thumb-size
+        cursor pointer
+        border-radius 50%
+        transition-property left
+        .ripple
+            transition-duration sw-ripple-duration
+    .on
+        switch()
+        background sw-track-on-color
+        .thumb
+            left sw-track-length - sw-thumb-size
+            background sw-thumb-on-color
+    .off
+        switch()
+        background sw-track-off-color
+        .thumb
+            left 0
+            background sw-thumb-off-color

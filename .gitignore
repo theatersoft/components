@@ -1,0 +1,6 @@
+/_*
+/dist
+/Theatersoft_*
+node_modules
+.idea
+/remotedev-db.sqlite3
