@@ -17,3 +17,5 @@ export {
 
 export {Button} from './button'
 export {Switch} from './switch'
+
+export {default as focus, mixinFocusable, Focuser} from './focus'

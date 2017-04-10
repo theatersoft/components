@@ -18,12 +18,14 @@
     "build-test-watch-reload": "node build.js test-all && node build.js test-watch & node build.js test-reload & wait",
     "build-watch": "node build.js watch",
     "build-watch-css": "node build.js watch-css",
+    "link": "npm link @theatersoft/bus",
     "publish": "node build.js publish"
   },
   "distScripts": {
     "link": "npm link"
   },
   "devDependencies": {
+    "@theatersoft/bus": "~1",
     "babel-core": "^6.18.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-class-properties": "^6.19.0",
