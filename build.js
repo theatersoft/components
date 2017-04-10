@@ -6,13 +6,41 @@ const
     name = pkg.name.startsWith('@theatersoft') && pkg.name.slice(13),
     DIST = process.env.DIST === 'true',
     fs = require('fs'),
-    mustache = require('mustache'),
-    babelCore = require('babel-core'),
+    copyright = `/*\n${fs.readFileSync('COPYRIGHT', 'utf8')}\n */`,
     {rollup} = require('rollup'),
     alias = require('rollup-plugin-alias'),
     commonjs = require('rollup-plugin-commonjs'),
     nodeResolve = require('rollup-plugin-node-resolve'),
-    babel = require('rollup-plugin-babel'),
+    babel = require('rollup-plugin-babel')({
+        babelrc: false,
+        comments: !DIST,
+        minified: DIST,
+        //presets: [babili],
+        plugins: [
+            [require("babel-plugin-transform-object-rest-spread"), {useBuiltIns: true}],
+            require("babel-plugin-transform-class-properties"),
+            [require("babel-plugin-transform-react-jsx"), {pragma: 'h'}],
+            //require("babel-plugin-transform-decorators-legacy"),
+            // babel-plugin-transform-decorators-legacy provided an invalid property of "default"
+            require("babel-plugin-external-helpers"),
+        ].concat(DIST ? [
+            require("babel-plugin-minify-constant-folding"),
+            //FAIL require("babel-plugin-minify-dead-code-elimination"), // es build unusable
+            require("babel-plugin-minify-flip-comparisons"),
+            require("babel-plugin-minify-guarded-expressions"),
+            require("babel-plugin-minify-infinity"),
+            require("babel-plugin-minify-mangle-names"),
+            require("babel-plugin-minify-replace"),
+            //FAIL require("babel-plugin-minify-simplify"),
+            require("babel-plugin-minify-type-constructors"),
+            require("babel-plugin-transform-member-expression-literals"),
+            require("babel-plugin-transform-merge-sibling-variables"),
+            require("babel-plugin-transform-minify-booleans"),
+            require("babel-plugin-transform-property-literals"),
+            require("babel-plugin-transform-simplify-comparison-operators"),
+            require("babel-plugin-transform-undefined-to-void")
+        ] : [])
+    }),
     replace = require('rollup-plugin-replace'),
     sourcemaps = require('rollup-plugin-sourcemaps')
 
@@ -57,10 +85,10 @@ const targets = {
         const bundle = await rollup({
             entry: `${__dirname}/src/index.js`,
             plugins: [
-                alias({
-                    //'preact-redux': `${__dirname}/../../preact-redux/dist/preact-redux.esm.js`
-                    'preact-redux': `./preact-redux.esm.js`
-                }),
+                //alias({
+                //    //'preact-redux': `${__dirname}/../../preact-redux/dist/preact-redux.esm.js`
+                //    'preact-redux': `./preact-redux.esm.js`
+                //}),
                 nodeResolve({
                     jsnext: true,
                     //module: true,
@@ -77,48 +105,16 @@ const targets = {
                 //    'process.env.NODE_ENV': JSON.stringify('production')
                 //}),
                 sourcemaps(),
-                babel({
-                    plugins: [
-                        [require("babel-plugin-transform-object-rest-spread"), {useBuiltIns: true}],
-                        require("babel-plugin-transform-class-properties"),
-                        [require("babel-plugin-transform-react-jsx"), {pragma: 'h'}],
-                        //require("babel-plugin-transform-decorators-legacy"),
-                        // babel-plugin-transform-decorators-legacy provided an invalid property of "default"
-                        require("babel-plugin-external-helpers"),
-                    ]
-                })
+                babel
             ]
         })
         await bundle.write({
-            dest: 'dist/dev/theatersoft-client.js',
-            format: 'iife',
-            moduleName: 'client',
-            sourceMap: 'inline'
+            dest: `dist/${name}.js`,
+            format: 'es',
+            moduleName: name,
+            banner: copyright,
+            sourceMap: !DIST // bus sourcemap must be file to passthrough rollup consumers
         })
-        fs.writeFileSync('dist/theatersoft-client.min.js', babelCore.transformFileSync('dist/dev/theatersoft-client.js', {
-            babelrc: false,
-            //exclude: 'node_modules/**',
-            comments: false,
-            minified: true,
-            plugins: [
-                require("babel-plugin-minify-constant-folding"),
-                require("babel-plugin-minify-dead-code-elimination"),
-                require("babel-plugin-minify-flip-comparisons"),
-                //FAIL require("babel-plugin-minify-guarded-expressions"), // breaks client pinpad
-                require("babel-plugin-minify-infinity"),
-                require("babel-plugin-minify-mangle-names"),
-                require("babel-plugin-minify-replace"),
-                //FAIL require("babel-plugin-minify-simplify"),
-                require("babel-plugin-minify-type-constructors"),
-                require("babel-plugin-transform-member-expression-literals"),
-                require("babel-plugin-transform-merge-sibling-variables"),
-                require("babel-plugin-transform-minify-booleans"),
-                require("babel-plugin-transform-property-literals"),
-                require("babel-plugin-transform-simplify-comparison-operators"),
-                require("babel-plugin-transform-undefined-to-void")
-            ]
-        }).code)
-        if (DIST) exec('rm -r dist/dev')
         console.log('... target bundle')
     },
 
