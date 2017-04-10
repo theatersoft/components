@@ -121,7 +121,7 @@ const targets = {
     package () {
         console.log('target package')
         const p = Object.assign({}, pkg, {
-            main: 'main.js',
+            module: `${name}.js`,
             private: !DIST,
             devDependencies: undefined,
             distScripts: undefined,
