@@ -9,7 +9,6 @@ const
     fs = require('fs'),
     copyright = `/*\n${fs.readFileSync('COPYRIGHT', 'utf8')}\n */`,
     {rollup} = require('rollup'),
-    //alias = require('rollup-plugin-alias'),
     commonjs = require('rollup-plugin-commonjs'),
     nodeResolve = require('rollup-plugin-node-resolve'),
     babel = require('rollup-plugin-babel')({
