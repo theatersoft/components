@@ -47,9 +47,9 @@ const
 const targets = {
     css () {
         console.log('target css')
-        require('stylus')(fs.readFileSync(`${__dirname}/styl/ts.styl`, 'utf8'))
+        require('stylus')(fs.readFileSync('styl/ts.styl', 'utf8'))
             .set('compress', false)
-            .set('paths', [`${__dirname}/styl`])
+            .set('paths', ['styl'])
             .include(require('nib').path)
             .render((err, css) => {
                 if (err) throw err
@@ -64,30 +64,30 @@ const targets = {
             cleanObjects: ['fill', 'style'],
             customSVGAttrs: {display: "none"} // TODO https://github.com/svgstore/svgstore/pull/15
         })
-        fs.readdirSync(`${__dirname}/svg`)
+        fs.readdirSync('svg')
             .filter(name => name.slice(-4) === '.svg')
             .forEach(name => {
                 console.log(name)
                 svg.add(
                     `svg-${name.slice(0, -4)}`,
-                    fs.readFileSync(`${__dirname}/svg/${name}`)
+                    fs.readFileSync(`svg/${name}`)
                 )
             })
-        fs.writeFileSync(`${__dirname}/res/icons.svg`, svg.toString({
+        fs.writeFileSync('res/icons.svg', svg.toString({
             inline: true
         }))
-        exec(`sed -i 's|<svg|<svg display="none"|g' ${__dirname}/res/icons.svg`)
+        exec(`sed -i 's|<svg|<svg display="none"|g' res/icons.svg`)
     },
 
     async bundle () {
         console.log('target bundle')
         exec('rm -f dist/dev/*.js dist/*.js')
         const bundle = await rollup({
-            entry: `${__dirname}/src/index.js`,
+            entry: 'src/index.js',
             plugins: [
                 //alias({
-                //    //'preact-redux': `${__dirname}/../../preact-redux/dist/preact-redux.esm.js`
-                //    'preact-redux': `./preact-redux.esm.js`
+                //    //'preact-redux': '../../preact-redux/dist/preact-redux.esm.js'
+                //    'preact-redux': './preact-redux.esm.js'
                 //}),
                 nodeResolve({
                     jsnext: true,
@@ -97,8 +97,8 @@ const targets = {
                 }),
                 commonjs({
                     include: [
-                        `${__dirname}/node_modules/**`,
-                        `${__dirname}/src/**`
+                        'node_modules/**',
+                        'src/**'
                     ]
                 }),
                 //replace({
@@ -137,7 +137,7 @@ const targets = {
     },
 
     watch () {
-        require('chokidar').watch(`${__dirname}/src`)
+        require('chokidar').watch('src')
             .on('change', path => {
                 console.log(path)
                 targets.bundle()
@@ -145,7 +145,7 @@ const targets = {
     },
 
     'watch-css' () {
-        require('chokidar').watch(`${__dirname}/styl`)
+        require('chokidar').watch('styl')
             .on('change', path => {
                 console.log(path)
                 targets.css()
