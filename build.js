@@ -41,7 +41,6 @@ const
             require("babel-plugin-transform-undefined-to-void")
         ] : [])
     }),
-    //replace = require('rollup-plugin-replace'),
     //sourcemaps = require('rollup-plugin-sourcemaps'),
     postcss = require('rollup-plugin-postcss'),
     stylus = require('stylus')
@@ -99,9 +98,6 @@ const targets = {
                         //'src/**'
                     ]
                 }),
-                //replace({
-                //    'process.env.NODE_ENV': JSON.stringify('production')
-                //}),
                 //sourcemaps(),
                 babel
             ]
