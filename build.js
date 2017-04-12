@@ -107,7 +107,7 @@ const targets = {
             ]
         })
         await bundle.write({
-            dest: `dist/${name}.js`,
+            dest: `dist/${name}.es.js`,
             format: 'es',
             moduleName: name,
             banner: copyright,
@@ -119,7 +119,8 @@ const targets = {
     package () {
         console.log('target package')
         const p = Object.assign({}, pkg, {
-            module: `${name}.js`,
+            main: `main.js`,
+            module: `${name}.es.js`,
             private: !DIST,
             devDependencies: undefined,
             distScripts: undefined,
@@ -128,6 +129,7 @@ const targets = {
         fs.writeFileSync('dist/package.json', JSON.stringify(p, null, '  '), 'utf-8')
         exec('cp LICENSE COPYRIGHT README.md .npmignore dist')
         exec('cp -r index.styl styl dist')
+        exec('touch dist/main.js')
     },
 
     publish () {
