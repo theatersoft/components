@@ -11,12 +11,7 @@
     "build": "time -p node build.js && ls -l dist",
     "build:dist": "DIST=true npm run build",
     "build-bundle": "time -p node build.js bundle",
-    "build-css": "node build.js css",
     "build-html": "node build.js html",
-    "build-svg": "node build.js svg",
-    "build-test-all": "node build.js test-all",
-    "build-test-css": "node build.js test-css",
-    "build-test-watch-reload": "node build.js test-all && node build.js test-watch & node build.js test-reload & wait",
     "build-watch": "node build.js watch",
     "link": "npm link @theatersoft/bus",
     "publish": "node build.js publish"
