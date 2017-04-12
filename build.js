@@ -127,7 +127,7 @@ const targets = {
         })
         fs.writeFileSync('dist/package.json', JSON.stringify(p, null, '  '), 'utf-8')
         exec('cp LICENSE COPYRIGHT README.md .npmignore dist')
-        exec('cp -r styl dist')
+        exec('cp -r index.styl styl dist')
     },
 
     publish () {
