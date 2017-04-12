@@ -46,27 +46,20 @@ const
     stylus = require('stylus')
 
 const targets = {
+    clean () {
+        console.log('target clean')
+        exec('mkdir -p dist')
+        exec('rm -rf dist/*')
+    },
+
     res () {
         console.log('target res')
         exec('mkdir -p dist/res')
         exec('cp res/*.ttf dist/res')
     },
 
-    css () {
-        console.log('target css')
-        require('stylus')(fs.readFileSync('styl/ts.styl', 'utf8'))
-            .set('compress', false)
-            .set('paths', ['styl'])
-            .include(require('nib').path)
-            .render((err, css) => {
-                if (err) throw err
-                fs.writeFileSync('dist/components.css', css)
-            })
-    },
-
     async bundle () {
         console.log('target bundle')
-        exec('rm -f dist/dev/*.js dist/*.js')
         const bundle = await rollup({
             entry: 'src/index.js',
             plugins: [
@@ -133,26 +126,19 @@ const targets = {
         exec('npm publish --access=public dist')
     },
 
-    watch () {
+    async watch () {
+        await targets.all()
         require('chokidar').watch('src')
             .on('change', path => {
-                console.log(path)
+                console.log(new Date().toLocaleTimeString(), path)
                 targets.bundle()
-            })
-    },
-
-    'watch-css' () {
-        require('chokidar').watch('styl')
-            .on('change', path => {
-                console.log(path)
-                targets.css()
             })
     },
 
     async all () {
         console.log('target all')
+        targets.clean()
         targets.res()
-        //targets.css()
         await targets.bundle()
         targets.package()
     }
