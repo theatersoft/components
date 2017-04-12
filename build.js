@@ -8,7 +8,7 @@ const
     fs = require('fs'),
     copyright = `/*\n${fs.readFileSync('COPYRIGHT', 'utf8')}\n */`,
     {rollup} = require('rollup'),
-    alias = require('rollup-plugin-alias'),
+    //alias = require('rollup-plugin-alias'),
     commonjs = require('rollup-plugin-commonjs'),
     nodeResolve = require('rollup-plugin-node-resolve'),
     babel = require('rollup-plugin-babel')({
@@ -41,10 +41,18 @@ const
             require("babel-plugin-transform-undefined-to-void")
         ] : [])
     }),
-    replace = require('rollup-plugin-replace'),
-    sourcemaps = require('rollup-plugin-sourcemaps')
+    //replace = require('rollup-plugin-replace'),
+    //sourcemaps = require('rollup-plugin-sourcemaps'),
+    postcss = require('rollup-plugin-postcss'),
+    stylus = require('stylus')
 
 const targets = {
+    res () {
+        console.log('target res')
+        exec('mkdir -p dist/res')
+        exec('cp res/*.ttf dist/res')
+    },
+
     css () {
         console.log('target css')
         require('stylus')(fs.readFileSync('styl/ts.styl', 'utf8'))
@@ -57,54 +65,44 @@ const targets = {
             })
     },
 
-    svg () {
-        console.log('target svg')
-        const svg = require('svgstore')({
-            cleanDefs: true,
-            cleanObjects: ['fill', 'style'],
-            customSVGAttrs: {display: "none"} // TODO https://github.com/svgstore/svgstore/pull/15
-        })
-        fs.readdirSync('svg')
-            .filter(name => name.slice(-4) === '.svg')
-            .forEach(name => {
-                console.log(name)
-                svg.add(
-                    `svg-${name.slice(0, -4)}`,
-                    fs.readFileSync(`svg/${name}`)
-                )
-            })
-        fs.writeFileSync('res/icons.svg', svg.toString({
-            inline: true
-        }))
-        exec(`sed -i 's|<svg|<svg display="none"|g' res/icons.svg`)
-    },
-
     async bundle () {
         console.log('target bundle')
         exec('rm -f dist/dev/*.js dist/*.js')
         const bundle = await rollup({
             entry: 'src/index.js',
             plugins: [
-                //alias({
-                //    //'preact-redux': '../../preact-redux/dist/preact-redux.esm.js'
-                //    'preact-redux': './preact-redux.esm.js'
-                //}),
+                postcss({
+                    preprocessor: (content, id) => new Promise((resolve, reject) => {
+                        const renderer = stylus(content, {
+                            filename: id,
+                            sourcemap: {inline: true},
+                            compress: false,
+                            paths: ['styl']
+                        })
+                        renderer.render((err, code) =>
+                            err ? reject(err) : resolve({code, map: renderer.sourcemap})
+                        )
+                    }),
+                    extensions: ['.styl'],
+                    //sourceMap: true, // true, "inline" or false
+                    extract: `dist/${name}.css`
+                }),
                 nodeResolve({
                     jsnext: true,
-                    //module: true,
+                    module: true,
                     //browser: true, // https://github.com/rollup/rollup-plugin-node-resolve/issues/55
                     main: true,
                 }),
                 commonjs({
                     include: [
                         'node_modules/**',
-                        'src/**'
+                        //'src/**'
                     ]
                 }),
                 //replace({
                 //    'process.env.NODE_ENV': JSON.stringify('production')
                 //}),
-                sourcemaps(),
+                //sourcemaps(),
                 babel
             ]
         })
@@ -129,6 +127,7 @@ const targets = {
         })
         fs.writeFileSync('dist/package.json', JSON.stringify(p, null, '  '), 'utf-8')
         exec('cp LICENSE COPYRIGHT README.md .npmignore dist')
+        exec('cp -r styl dist')
     },
 
     publish () {
@@ -154,7 +153,8 @@ const targets = {
 
     async all () {
         console.log('target all')
-        targets.css()
+        targets.res()
+        //targets.css()
         await targets.bundle()
         targets.package()
     }

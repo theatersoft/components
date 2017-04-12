@@ -1,4 +1,6 @@
 import {h, Component} from 'preact'
+import './grid.styl'
+import './controls.styl'
 
 //export const Button = (function() {
 //    var view = function(c) {

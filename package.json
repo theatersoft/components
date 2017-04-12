@@ -1,7 +1,7 @@
 {
   "name": "@theatersoft/components",
   "version": "1.0.0",
-  "description": "Theatersoft Client Components",
+  "description": "Components for preact Theatersoft client",
   "author": "Rob Huehn <rob@theatersoft.com>",
   "license": "AGPL-3.0",
   "keywords": [],
@@ -44,7 +44,7 @@
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-commonjs": "^5.0.5",
     "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-postcss": "^0.2.0",
+    "rollup-plugin-postcss": "^0.4.0",
     "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-sourcemaps": "^0.4.1",
     "rollup-watch": "^3.2.2",
