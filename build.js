@@ -62,6 +62,10 @@ const targets = {
         console.log('target bundle')
         const bundle = await rollup({
             entry: 'src/index.js',
+            external: [
+                'preact',
+                '@theatersoft/bus'
+            ],
             plugins: [
                 postcss({
                     preprocessor: (content, id) => new Promise((resolve, reject) => {
