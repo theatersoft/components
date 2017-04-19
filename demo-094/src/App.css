@@ -27,6 +27,7 @@ html {
   overflow: hidden;
   user-select: none;
 }
+
 #video,
 #video>div,
 #ui {
@@ -40,5 +41,8 @@ html {
   font-size: 8rem;
   font-family: Alegreya Sans SC;
   color: #e0e0e0;
-  transform-style: preserve-3d;
+}
+#video {
+  background-image: url(http://192.168.1.16:5402);
+  background-size: contain;
 }
