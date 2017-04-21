@@ -40,6 +40,8 @@
     "promise": "7.1.1",
     "react-dev-utils": "^0.5.2",
     "style-loader": "0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
     "url-loader": "0.5.7",
     "webpack": "2.2.1",
     "webpack-dev-server": "2.4.1",
@@ -78,14 +80,22 @@
     }
   },
   "babel": {
-    "presets": [
-    ],
+    "presets": [],
     "plugins": [
-      ["transform-react-jsx", {"pragma": "h", "useBuiltIns": true}],
+      [
+        "transform-react-jsx",
+        {
+          "pragma": "h",
+          "useBuiltIns": true
+        }
+      ],
       "transform-class-properties",
-      ["transform-object-rest-spread", {"useBuiltIns": true}],
-      "transform-react-jsx-source",
-      "transform-react-jsx-self"
+      [
+        "transform-object-rest-spread",
+        {
+          "useBuiltIns": true
+        }
+      ]
     ]
   },
   "eslintConfig": {

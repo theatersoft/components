@@ -4,7 +4,7 @@ import {
     //Icon, mixinFocusable,
     Switch
 } from '@theatersoft/components'
-import './App.css'
+import './App.styl'
 import '@theatersoft/components/components.css'
 
 class Switches extends Component {
