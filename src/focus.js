@@ -2,10 +2,10 @@ import Hammer from 'hammerjs'
 import {mixinEventEmitter} from '@theatersoft/bus'
 
 const stack = [] // stack of sinks
-let sink
+let sink = {}
 
 const focus = new (mixinEventEmitter(class {
-    init () {
+    constructor () {
         Hammer(window.document.body, {
             drag_lock_to_axis: true
         })
