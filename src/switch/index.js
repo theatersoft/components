@@ -1,7 +1,7 @@
 import {h, Component} from 'preact'
 //import rippleFactory from './Ripple.js'
 import thumbFactory from './Thumb.js'
-import './index.styl'
+import style from './index.styl'
 
 export const switchFactory = (Thumb) => {
     return class extends Component {
@@ -14,12 +14,12 @@ export const switchFactory = (Thumb) => {
 
         render ({label, checked = false, disabled = false}) {
             return (
-                <label class={disabled ? 'sw disabled' : 'sw field'}
+                <label class={disabled ? style.disabled : style.field}
                         onClick={this.handleToggle}>
-                    <span class={checked ? 'on' : 'off'}>
+                    <span class={checked ? style.on : style.off}>
                         <Thumb disabled={disabled}/>
                     </span>
-                    {label && <span class='sw-label'>{label}</span>}
+                    {label && <span>{label}</span>}
                 </label>
             )
         }

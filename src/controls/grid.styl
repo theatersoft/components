@@ -8,18 +8,19 @@ clearfix()
         display table
         clear both
 
-.container
-    position absolute
-    width 100%
-    height  100%
-    padding 0 w(2)
-    //box-sizing border-box
+:global
+    .container
+        position absolute
+        width 100%
+        height  100%
+        padding 0 w(2)
+        //box-sizing border-box
 
-.row
-    margin 0 w(-2)
-    clearfix()
+    .row
+        margin 0 w(-2)
+        clearfix()
 
-.col
-    float left
-    padding h(1) h(2)
-    //box-sizing border-box
+    .col
+        float left
+        padding h(1) h(2)
+        //box-sizing border-box

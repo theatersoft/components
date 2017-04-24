@@ -41,9 +41,11 @@ const
             require("babel-plugin-transform-undefined-to-void")
         ] : [])
     }),
-    //sourcemaps = require('rollup-plugin-sourcemaps'),
+//sourcemaps = require('rollup-plugin-sourcemaps'),
     postcss = require('rollup-plugin-postcss'),
-    stylus = require('stylus')
+    stylus = require('stylus'),
+    postcssModules = require('postcss-modules'),
+    cssExportMap = {}
 
 const targets = {
     clean () {
@@ -81,7 +83,13 @@ const targets = {
                     }),
                     extensions: ['.styl'],
                     //sourceMap: true, // true, "inline" or false
-                    extract: `dist/${name}.css`
+                    extract: `dist/${name}.css`,
+                    plugins: [
+                        postcssModules({
+                            getJSON(id, exportTokens) {cssExportMap[id] = exportTokens}
+                        })
+                    ],
+                    getExport: id => cssExportMap[id]
                 }),
                 nodeResolve({
                     jsnext: true,

@@ -30,6 +30,7 @@
     "hammerjs": "~1.0.11",
     "livereload": "^0.6.0",
     "nib": "~1.0.3",
+    "postcss-modules": "^0.6.4",
     "preact": "^6.4.0",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.6.1",
