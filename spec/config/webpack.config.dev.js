@@ -138,27 +138,11 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader', {
+                    'style-loader',
+                    {
                         loader: 'css-loader',
                         options: {
                             importLoaders: 1
-                        }
-                    }, {
-                        loader: 'postcss-loader',
-                        options: {
-                            ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-                            plugins: function () {
-                                return [
-                                    autoprefixer({
-                                        browsers: [
-                                            '>1%',
-                                            'last 4 versions',
-                                            'Firefox ESR',
-                                            'not ie < 9', // React doesn't support IE8 anyway
-                                        ]
-                                    })
-                                ]
-                            }
                         }
                     }
                 ]
@@ -176,7 +160,10 @@ module.exports = {
                 use: [
                     'style-loader',
                     'css-loader',
-                    'stylus-loader'
+                    {
+                        loader: 'stylus-loader',
+                        options: {paths: ['node_modules']}
+                    }
                 ]
             }
             // ** STOP ** Are you adding a new loader?
