@@ -1,20 +1,14 @@
-import {h, Component} from 'preact'
+import {h} from 'preact'
 import {Button} from '@theatersoft/components'
 
-export default class extends Component {
-    onChange = value => {
-        console.log('Button.onChange', value)
-    }
-
-    render (p) {
-        console.log('Button.render', p, this.state)
-        return (
-            <section>
-                <Button
-                    label="button"
-                    onChange={this.onChange}
-                />
-            </section>
-        )
-    }
-}
+export default () => (
+    <section>
+        <Button label="Flat" flat/>
+        <Button label="Raised" raised/>
+        <Button label="Primary" primary/>
+        <Button label="Accent" accent/>
+        <Button icon="add" floating/>
+        <Button icon="add" floating primary/>
+        <Button icon="add" floating accent/>
+    </section>
+)
