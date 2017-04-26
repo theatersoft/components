@@ -148,12 +148,16 @@ module.exports = {
                 ]
             },
             // "file" loader for svg
+            //{
+            //    test: /\.svg$/,
+            //    loader: 'file-loader',
+            //    options: {
+            //        name: 'static/media/[name].[hash:8].[ext]'
+            //    }
+            //},
             {
-                test: /\.svg$/,
-                loader: 'file-loader',
-                options: {
-                    name: 'static/media/[name].[hash:8].[ext]'
-                }
+                test: /\.svg$/i,
+                loader: 'inline-loader'
             },
             {
                 test: /\.styl$/,
