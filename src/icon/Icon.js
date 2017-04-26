@@ -1,5 +1,5 @@
 import {h, Component} from 'preact'
-import './index.styl'
+import './icon.styl'
 
 export const Icon = ({icon, cb}) =>
     <div class="iconpad" onClick={e => {e.stopPropagation(); cb()}}>

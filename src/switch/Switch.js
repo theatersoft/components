@@ -1,7 +1,7 @@
 import {h, Component} from 'preact'
 //import rippleFactory from './Ripple.js'
 import thumbFactory from './Thumb.js'
-import style from './index.styl'
+import style from './switch.styl'
 
 export const switchFactory = (Thumb) => {
     return class extends Component {

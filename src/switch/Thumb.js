@@ -1,5 +1,5 @@
 import {h, Component} from 'preact'
-import style from './index.styl'
+import style from './switch.styl'
 
 const factory = (ripple) => {
   const Thumb = ({onMouseDown, theme, ...other}) => (
