@@ -7,8 +7,8 @@ export default () => (
         <Button label="Raised" raised/>
         <Button label="Primary" primary/>
         <Button label="Accent" accent/>
-        <Button icon="add" floating/>
-        <Button icon="add" floating primary/>
-        <Button icon="add" floating accent/>
+        <Button icon="cross" floating/>
+        <Button icon="cross" floating primary/>
+        <Button icon="cross" floating accent/>
     </section>
 )

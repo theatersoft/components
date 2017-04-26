@@ -1,4 +1,5 @@
 import {h, Component} from 'preact'
+import {Icon} from '../icon'
 
 export class Button extends Component {
     render ({
@@ -6,6 +7,7 @@ export class Button extends Component {
         className,
         flat = false,
         floating = false,
+        icon,
         label,
         mini = false,
         neutral = true,
@@ -15,6 +17,7 @@ export class Button extends Component {
         }) {
         return (
             <button class="button">
+                {icon && <Icon icon={icon}/>}
                 {label}
             </button>
         )
