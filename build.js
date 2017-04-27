@@ -144,6 +144,7 @@ const targets = {
             .on('change', path => {
                 console.log(new Date().toLocaleTimeString(), path)
                 targets.bundle()
+                if (path.startsWith('styl')) exec('cp -r styl dist')
             })
     },
 
