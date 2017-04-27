@@ -2,7 +2,7 @@ import {h} from 'preact'
 import {Button} from '@theatersoft/components'
 
 export default () => (
-    <section>
+    <section class="inverse">
         <Button label="Flat" flat/>
         <Button label="Raised" raised/>
         <Button label="Primary" primary/>
