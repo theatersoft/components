@@ -1,0 +1,68 @@
+@import base
+@import colors
+@import theme
+
+unit = 2.4rem
+neutral-color = color-white
+neutral-color-contrast = palette-grey-900
+neutral-color-hover = rgba(palette-grey-900, .2)
+primary-color-contrast = color-primary-contrast
+primary-color-hover = rgba(color-primary, .2)
+accent-color-contrast = color-primary-contrast
+accent-color-hover = rgba(color-accent, .2)
+accent-color = color-accent
+disabled-text-color = rgba(color-black, 0.26)
+disabled-background-color = rgba(color-black, 0.12)
+disabled-text-color-inverse = rgba(color-white, 0.54)
+disabled-background-inverse = rgba(color-white, 0.08)
+
+border-radius = 0.2 * unit
+floating-height = unit * 5.6
+floating-mini-height = unit * 4
+
+height = unit * 3.6
+squared-icon-margin = unit * .6
+squared-min-width = 9 * unit
+squared-padding = 0 unit * 1.2
+toggle-font-size = unit * 2
+
+button()
+    display inline-block
+    height height
+    flex-direction row
+    align-content center
+    align-items center
+    justify-content center
+    line-height height
+    text-align center
+    padding 0
+    border 0
+    outline none
+
+rect()
+
+floating()
+    border-radius 50%
+    width floating-height
+    height floating-height
+
+button
+    button()
+    &.neutral
+        color color-primary-contrast
+        background color-primary
+    &.raised
+    &.primary
+        color color-primary-contrast
+        background color-primary
+    &.accent
+        color color-accent-contrast
+        background color-accent
+    &.inverse
+    &.floating
+        floating()
+        .icon
+            line-height floating-height
+        &.mini
+            .icon
+                line-height floating-mini-height

@@ -1,11 +1,13 @@
 import {h, Component} from 'preact'
 import {Icon} from '../icon'
 import {classes} from '../classes'
+import style from './button.styl'
 
 export class Button extends Component {
     render ({
         accent = false,
         className,
+        disabled,
         floating = false,
         icon,
         inverse,
@@ -18,11 +20,11 @@ export class Button extends Component {
         return (
             <button class={classes(
                 className,
-                primary ? 'primary' : accent && 'accent',
-                raised ? 'raised' : floating && 'floating',
-                {inverse},
-                {mini}
-            )}>
+                primary ? style.primary : accent && style.accent,
+                raised ?  style.raised : floating &&  style.floating,
+                inverse && style.inverse,
+                mini && style.mini
+            )} {...{disabled}}>
                 {icon && <Icon icon={icon}/>}
                 {label}
             </button>
