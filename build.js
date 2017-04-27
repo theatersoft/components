@@ -41,7 +41,7 @@ const
             require("babel-plugin-transform-undefined-to-void")
         ] : [])
     }),
-//sourcemaps = require('rollup-plugin-sourcemaps'),
+    sourcemaps = require('rollup-plugin-sourcemaps'),
     postcss = require('rollup-plugin-postcss'),
     stylus = require('stylus'),
     postcssModules = require('postcss-modules'),
@@ -82,7 +82,7 @@ const targets = {
                         )
                     }),
                     extensions: ['.styl'],
-                    //sourceMap: true, // true, "inline" or false
+                    sourceMap: true, // true, "inline" or false
                     extract: `dist/${name}.css`,
                     plugins: [
                         postcssModules({
@@ -103,7 +103,7 @@ const targets = {
                         //'src/**'
                     ]
                 }),
-                //sourcemaps(),
+                sourcemaps(),
                 babel
             ]
         })
