@@ -1,22 +1,28 @@
 import {h, Component} from 'preact'
 import {Icon} from '../icon'
+import {classes} from '../classes'
 
 export class Button extends Component {
     render ({
         accent = false,
         className,
-        flat = false,
         floating = false,
         icon,
+        inverse,
         label,
         mini = false,
-        neutral = true,
         primary = false,
         raised = false,
         ...others
         }) {
         return (
-            <button class="button">
+            <button class={classes(
+                className,
+                primary ? 'primary' : accent && 'accent',
+                raised ? 'raised' : floating && 'floating',
+                {inverse},
+                {mini}
+            )}>
                 {icon && <Icon icon={icon}/>}
                 {label}
             </button>

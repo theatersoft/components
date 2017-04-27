@@ -1,8 +1,8 @@
 import {h} from 'preact'
-import {Button} from '@theatersoft/components'
+import {Button, classes} from '@theatersoft/components'
 
-export default () => (
-    <section class="inverse">
+export default ({inverse}) => (
+    <section class={classes({inverse})}>
         <Button label="Flat" flat/>
         <Button label="Raised" raised/>
         <Button label="Primary" primary/>
