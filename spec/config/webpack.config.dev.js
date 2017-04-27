@@ -169,6 +169,11 @@ module.exports = {
                         options: {paths: ['node_modules']}
                     }
                 ]
+            },
+            {
+                test: /\.js$/,
+                use: ["source-map-loader"],
+                enforce: "pre"
             }
             // ** STOP ** Are you adding a new loader?
             // Remember to add the new extension(s) to the "url" loader exclusion list.
