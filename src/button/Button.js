@@ -20,8 +20,8 @@ export class Button extends Component {
         return (
             <button class={classes(
                 props.class,
-                primary ? style.primary : accent && style.accent,
-                raised ?  style.raised : floating &&  style.floating,
+                primary ? style.primary : accent ? style.accent : style.neutral,
+                raised ?  style.raised : floating ?  style.floating : style.flat,
                 inverse && style.inverse,
                 mini && style.mini
             )} {...{disabled}}>

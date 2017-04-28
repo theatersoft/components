@@ -39,30 +39,40 @@ button()
     border 0
     outline none
 
-rect()
+squared()
+    min-width squared-min-width
+    padding squared-padding
+    border-radius border-radius
 
 floating()
     border-radius 50%
     width floating-height
     height floating-height
 
-button
+.flat
     button()
-    &.neutral
-        color color-primary-contrast
-        background color-primary
-    &.raised
-    &.primary
-        color color-primary-contrast
-        background color-primary
-    &.accent
-        color color-accent-contrast
-        background color-accent
-    &.inverse
-    &.floating
-        floating()
+    squared()
+.raised
+    button()
+    squared()
+.floating
+    button()
+    floating()
+    .icon
+        line-height floating-height
+    &.mini
         .icon
-            line-height floating-height
-        &.mini
-            .icon
-                line-height floating-mini-height
+            line-height floating-mini-height
+
+.neutral
+    color color-primary-contrast
+    background color-primary
+    &.inverse
+        color color-primary
+        background color-primary-contrast
+.primary
+    color color-primary-contrast
+    background color-primary
+.accent
+    color color-accent-contrast
+    background color-accent
