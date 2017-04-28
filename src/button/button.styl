@@ -3,24 +3,9 @@
 @import theme
 
 unit = 2.4rem
-neutral-color = color-white
-neutral-color-contrast = palette-grey-900
-neutral-color-hover = rgba(palette-grey-900, .2)
-primary-color-contrast = color-primary-contrast
-primary-color-hover = rgba(color-primary, .2)
-accent-color-contrast = color-primary-contrast
-accent-color-hover = rgba(color-accent, .2)
-accent-color = color-accent
-disabled-text-color = rgba(color-black, 0.26)
-disabled-background-color = rgba(color-black, 0.12)
-disabled-text-color-inverse = rgba(color-white, 0.54)
-disabled-background-inverse = rgba(color-white, 0.08)
-
-border-radius = 0.2 * unit
+height = unit * 3.6
 floating-height = unit * 5.6
 floating-mini-height = unit * 4
-
-height = unit * 3.6
 squared-icon-margin = unit * .6
 squared-min-width = 9 * unit
 squared-padding = 0 unit * 1.2
@@ -41,15 +26,12 @@ button()
     text()
     font-size unit * 2
     font-weight 500
-    line-height 1
     text-transform uppercase
-    letter-spacing 0
-
 
 squared()
     min-width squared-min-width
     padding squared-padding
-    border-radius border-radius
+    border-radius 0.2 * unit
 
 floating()
     border-radius 50%
@@ -73,6 +55,19 @@ floating()
     &.mini
         .icon
             line-height floating-mini-height
+
+neutral-color = color-white
+neutral-color-contrast = palette-grey-900
+neutral-color-hover = rgba(palette-grey-900, .2)
+primary-color-contrast = color-primary-contrast
+primary-color-hover = rgba(color-primary, .2)
+accent-color-contrast = color-primary-contrast
+accent-color-hover = rgba(color-accent, .2)
+accent-color = color-accent
+disabled-text-color = rgba(color-black, 0.26)
+disabled-background-color = rgba(color-black, 0.12)
+disabled-text-color-inverse = rgba(color-white, 0.54)
+disabled-background-inverse = rgba(color-white, 0.08)
 
 .neutral
     &.raised, &.floating
