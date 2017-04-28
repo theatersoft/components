@@ -45,6 +45,7 @@ button()
     text-transform uppercase
     letter-spacing 0
 
+
 squared()
     min-width squared-min-width
     padding squared-padding
@@ -58,9 +59,12 @@ floating()
 .flat
     button()
     squared()
+    background transparent
+
 .raised
     button()
     squared()
+
 .floating
     button()
     floating()
@@ -71,14 +75,26 @@ floating()
             line-height floating-mini-height
 
 .neutral
-    color color-primary-contrast
-    background color-primary
+    &.raised, &.floating
+    color neutral-color
+    background neutral-color-contrast
+    &.flat
+        color neutral-color
+    &.flat:hover
+        neutral-color-hover
     &.inverse
-        color color-primary
-        background color-primary-contrast
+        &.raised, &.floating
+            color neutral-color-contrast
+            background neutral-color
+        &.flat
+            color neutral-color-contrast
+        &.flat:hover
+            neutral-color-hover
+
 .primary
     color color-primary-contrast
     background color-primary
+
 .accent
     color color-accent-contrast
     background color-accent
