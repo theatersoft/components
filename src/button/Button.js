@@ -25,7 +25,7 @@ export class Button extends Component {
                 inverse && style.inverse,
                 mini && style.mini
             )} {...{disabled}}>
-                {icon && <Icon icon={icon} class={style.icon}/>}
+                {icon && <Icon icon={icon} class={style.icon} small/>}
                 {label}
             </button>
         )
