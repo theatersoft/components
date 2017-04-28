@@ -5,11 +5,14 @@
 :global
     .icon
         display inline-block
-        &:not(.small)
-            svg
-                width w(8)
-                height h(8)
-        &.small
-            svg
-                width w(5)
-                height h(5)
+        svg
+            vertical-align middle
+        &:not(.small) svg
+            width 8rem
+            height 8rem
+            //line-height h(8)
+
+        &.small svg
+            width 5rem
+            height 5rem
+            //line-height h(5)

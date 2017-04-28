@@ -3,40 +3,31 @@
 @import theme
 
 unit = 2.4rem
-height = unit * 3.6
-floating-height = unit * 5.6
-floating-mini-height = unit * 4
+height = unit * 3.4
+floating-height = unit * 5.3
+floating-mini-height = unit * 3.6
 squared-icon-margin = unit * .6
 squared-min-width = 9 * unit
-squared-padding = 0 unit * 1.2
+squared-padding = 0 unit * 0.6
 toggle-font-size = unit * 2
 
 button()
     display inline-block
     height height
-    flex-direction row
-    align-content center
-    align-items center
-    justify-content center
     line-height height
     text-align center
-    padding 0
     border 0
     outline none
     text()
     font-size unit * 2
     font-weight 500
     text-transform uppercase
+    vertical-align middle
 
 squared()
     min-width squared-min-width
     padding squared-padding
     border-radius 0.2 * unit
-
-floating()
-    border-radius 50%
-    width floating-height
-    height floating-height
 
 .flat
     button()
@@ -49,12 +40,16 @@ floating()
 
 .floating
     button()
-    floating()
+    border-radius 50%
+    width floating-height
+    height floating-height
     .icon
-        line-height floating-height
+        vertical-align middle
     &.mini
+        width floating-mini-height
+        height floating-mini-height
         .icon
-            line-height floating-mini-height
+            vertical-align middle
 
 neutral-color = color-white
 neutral-color-contrast = palette-grey-900

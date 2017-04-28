@@ -8,14 +8,14 @@ export class Icon extends Component {
         const {icon, small, cb} = props
         console.log(props)
         return (
-            <div
+            <span
                 class={classes('icon', props.class, small && 'small')}
                 onClick={e => {e.stopPropagation(); cb && cb()}}
             >
                 <svg id={`icon-${icon}`}>
                     <use href={`#svg-${icon}`}/>
                 </svg>
-            </div>
+            </span>
         )
     }
 }
