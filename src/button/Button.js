@@ -4,28 +4,28 @@ import {classes} from '../classes'
 import style from './button.styl'
 
 export class Button extends Component {
-    render ({
-        accent = false,
-        className,
-        disabled,
-        floating = false,
-        icon,
-        inverse,
-        label,
-        mini = false,
-        primary = false,
-        raised = false,
-        ...others
-        }) {
+    render (props) {
+        const {
+            accent = false,
+            disabled,
+            floating = false,
+            icon,
+            inverse,
+            label,
+            mini = false,
+            primary = false,
+            raised = false,
+            ...others
+            } = props
         return (
             <button class={classes(
-                className,
+                props.class,
                 primary ? style.primary : accent && style.accent,
                 raised ?  style.raised : floating &&  style.floating,
                 inverse && style.inverse,
                 mini && style.mini
             )} {...{disabled}}>
-                {icon && <Icon icon={icon}/>}
+                {icon && <Icon icon={icon} class={style.icon}/>}
                 {label}
             </button>
         )

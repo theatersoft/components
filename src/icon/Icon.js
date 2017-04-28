@@ -3,10 +3,13 @@ import {classes} from '../classes'
 import './icon.styl'
 
 export class Icon extends Component {
-    render ({icon, small, cb}) {
+    //render ({icon, small, cb, className}) {
+    render (props) {
+        const {icon, small, cb} = props
+        console.log(props)
         return (
             <div
-                class={classes('icon', small && 'small')}
+                class={classes('icon', props.class, small && 'small')}
                 onClick={e => {e.stopPropagation(); cb && cb()}}
             >
                 <svg id={`icon-${icon}`}>
