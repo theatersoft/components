@@ -12,17 +12,18 @@ squared-padding = 0 unit * 0.6
 toggle-font-size = unit * 2
 
 button()
-    display inline-block
+    display flex
     height height
-    line-height height
     text-align center
+    flex-direction row
+    align-items center
+    justify-content center
     border 0
     outline none
     text()
     font-size unit * 2
     font-weight 500
     text-transform uppercase
-    vertical-align middle
 
 squared()
     min-width squared-min-width
@@ -44,12 +45,12 @@ squared()
     width floating-height
     height floating-height
     .icon
-        vertical-align middle
+        display inline-block
     &.mini
         width floating-mini-height
         height floating-mini-height
         .icon
-            vertical-align middle
+            display inline-block
 
 neutral-color = color-white
 neutral-color-contrast = palette-grey-900
