@@ -17,7 +17,7 @@ export default class extends Component {
             <section>
                 <Switch
                     checked={sw}
-                    label="switch"
+                    label="Switch"
                     onChange={this.onChange}
                 />
             </section>

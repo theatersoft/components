@@ -2,6 +2,8 @@
 @import colors
 @import theme
 
+unit = 3.0rem
+
 :global
     .icon
         display inline-block
@@ -10,8 +12,8 @@
             fill currentColor
             vertical-align middle
         &:not(.small) svg
-            width 8rem
-            height 8rem
+            width unit * 3
+            height unit * 3
         &.small svg
-            width 5rem
-            height 5rem
+            width unit * 2
+            height unit * 2
