@@ -21,7 +21,6 @@ export default class extends Component {
                     onChange={this.onChange}
                 />
             </section>
-
         )
     }
 }

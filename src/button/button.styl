@@ -7,9 +7,8 @@ height = unit * 3.6
 floating-height = unit * 5.3
 floating-mini-height = unit * 3.6
 squared-icon-margin = unit * .6
-squared-min-width = 9 * unit
-squared-padding = 0 unit * 0.6
-toggle-font-size = unit * 2
+squared-min-width = unit * 9
+squared-padding = 0 unit * 0.8
 
 button()
     display flex
@@ -65,18 +64,18 @@ disabled-background-inverse = rgba(color-white, 0.08)
 
 .neutral
     &.raised, &.floating
-    color neutral-color
-    background neutral-color-contrast
+        color neutral-color-contrast
+        background neutral-color
     &.flat
-        color neutral-color
+        color neutral-color-contrast
     &.flat:hover
         neutral-color-hover
     &.inverse
         &.raised, &.floating
-            color neutral-color-contrast
-            background neutral-color
+            color neutral-color
+            background neutral-color-contrast
         &.flat
-            color neutral-color-contrast
+            color neutral-color
         &.flat:hover
             neutral-color-hover
 

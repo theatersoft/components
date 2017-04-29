@@ -10,7 +10,7 @@ export default () => (
         <Switch/>
         <Icon/>
         <Button/>
-        <Button inverse/>
+        <Button light/>
     </div>
 )
 
