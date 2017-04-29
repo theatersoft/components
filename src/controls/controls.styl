@@ -2,23 +2,14 @@
 @import colors
 @import theme
 
-vert-align()
-    position relative
-    top 50%
-    transform translateY(-50%)
-
-:global
-    .inset
-        background-color theme-background-transparent
+:global .inset
+    background-color theme-background-transparent
+    position absolute
+    top h(0)
+    height h(100)
+    left w(10)
+    width w(80)
+    #icon-cross
         position absolute
-        top h(0)
-        height h(100)
-        left w(10)
-        width w(80)
-        #icon-cross
-            position absolute
-            top 0
-            right 0
-
-    .text span:empty:before
-        content "\200b"
+        top 0
+        right 0
