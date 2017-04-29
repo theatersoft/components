@@ -51,11 +51,11 @@ squared()
 
 neutral-color = color-white
 neutral-color-contrast = palette-grey-900
-neutral-color-hover = rgba(palette-grey-600, .5)
+neutral-color-hover = rgba(palette-grey-600, .6)
 primary-color-contrast = color-primary-contrast
-primary-color-hover = rgba(color-primary, .2)
+primary-color-hover = rgba(color-primary-light, .5)
 accent-color-contrast = color-primary-contrast
-accent-color-hover = rgba(color-accent, .2)
+accent-color-hover = rgba(color-accent, .3)
 accent-color = color-accent
 disabled-text-color = rgba(color-black, 0.26)
 disabled-background-color = rgba(color-black, 0.12)
@@ -68,6 +68,7 @@ disabled-background-inverse = rgba(color-white, 0.08)
         background neutral-color
     &.flat
         color neutral-color-contrast
+        background transparent
     &.flat:hover
         background neutral-color-hover
     &.inverse
@@ -80,9 +81,22 @@ disabled-background-inverse = rgba(color-white, 0.08)
             background neutral-color-hover
 
 .primary
-    color color-primary-contrast
-    background color-primary
+    &.raised, &.floating
+        color color-primary-contrast
+        background color-primary
+    &.flat
+        color color-primary
+    &.flat:hover
+        background primary-color-hover
+    &.inverse
+        &.flat
+            color color-primary-light
 
 .accent
-    color color-accent-contrast
-    background color-accent
+    &.raised, &.floating
+        color color-accent-contrast
+        background color-accent
+    &.flat
+        color color-accent
+    &.flat:hover
+        background accent-color-hover
