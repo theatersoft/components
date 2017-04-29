@@ -51,7 +51,7 @@ squared()
 
 neutral-color = color-white
 neutral-color-contrast = palette-grey-900
-neutral-color-hover = rgba(palette-grey-900, .2)
+neutral-color-hover = rgba(palette-grey-600, .5)
 primary-color-contrast = color-primary-contrast
 primary-color-hover = rgba(color-primary, .2)
 accent-color-contrast = color-primary-contrast
@@ -69,7 +69,7 @@ disabled-background-inverse = rgba(color-white, 0.08)
     &.flat
         color neutral-color-contrast
     &.flat:hover
-        neutral-color-hover
+        background neutral-color-hover
     &.inverse
         &.raised, &.floating
             color neutral-color
@@ -77,7 +77,7 @@ disabled-background-inverse = rgba(color-white, 0.08)
         &.flat
             color neutral-color
         &.flat:hover
-            neutral-color-hover
+            background neutral-color-hover
 
 .primary
     color color-primary-contrast
