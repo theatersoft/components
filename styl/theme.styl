@@ -24,11 +24,6 @@ text()
     font-size 8rem
     font-family Alegreya Sans SC
 
-//h1, h2, h3
-//    /*text3d(theme-color)*/
-//    -webkit-margin-before: 0
-//    -webkit-margin-after: 0
-
 animation-duration = .35s
 animation-delay = animation-duration / 5
 animation-curve-fast-out-slow-in = cubic-bezier(0.4, 0, 0.2, 1)
@@ -39,3 +34,24 @@ animation-curve-default = animation-curve-fast-out-slow-in
 material-animation-default(duration)
     transition-timing-function animation-curve-default
     transition-duration duration
+
+umbra-opacity = 0.2
+penumbra-opacity = 0.14
+ambient-opacity = 0.12
+
+// offset-x offset-y blur-radius spread-radius color
+
+focus-shadow()
+    box-shadow 0 0 4rem rgba(color-black, .18), 0 4rem 8rem rgba(0, 0, 0, .36)
+focus-shadow-inverse()
+    box-shadow 0 0 4rem rgba(color-white, .18), 0 4rem 8rem rgba(0, 0, 0, .36)
+
+shadow-z()
+    box-shadow 0 2rem 2rem 0 rgba(color-black, penumbra-opacity), 0 3rem 1rem -2rem rgba(0, 0, 0, umbra-opacity), 0 1rem 5rem 0 rgba(0, 0, 0, ambient-opacity)
+shadow-z-inverse()
+    box-shadow 0 1rem 1rem 0 rgba(color-white, .3), 0 1rem 5rem 0 rgba(0, 0, 0, .1)
+
+shadow-zz()
+    box-shadow 0 4rem 5rem rgba(color-black, penumbra-opacity), 0 1rem 10rem rgba(0, 0, 0, ambient-opacity), 0 2rem 4rem -1rem rgba(0, 0, 0, umbra-opacity)
+shadow-zz-inverse()
+    box-shadow 0 4rem 5rem rgba(color-white, penumbra-opacity), 0 1rem 10rem rgba(0, 0, 0, ambient-opacity)

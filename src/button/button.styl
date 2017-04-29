@@ -27,6 +27,17 @@ squared()
     padding squared-padding
     border-radius 0.2 * unit
 
+solid()
+    &:active
+        shadow-zz()
+    &:focus:not(:active)
+        focus-shadow()
+    &.inverse
+        &:active
+            shadow-zz-inverse()
+        &:focus:not(:active)
+            focus-shadow-inverse()
+
 .flat
     button()
     squared()
@@ -35,12 +46,20 @@ squared()
 .raised
     button()
     squared()
+    solid()
+    shadow-z()
+    &.inverse
+        shadow-z-inverse()
 
 .floating
     button()
+    solid()
     border-radius 50%
+    box-shadow 0 1rem 1.5rem 0 rgba(color-black, .12), 0 1rem 1rem 0 rgba(color-black, .24)
     width floating-height
     height floating-height
+    &.inverse
+        box-shadow 0 1rem 1rem 0 rgba(color-white, .4), 0 1rem 1rem 0 rgba(color-black, .4)
     .icon
         display inline-block
     &.mini
