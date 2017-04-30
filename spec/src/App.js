@@ -6,11 +6,12 @@ import Switch from './components/switch'
 import './App.styl'
 
 export default () => (
-    <div>
+    <div class="scroll">
         <Switch/>
         <Icon/>
         <Button/>
         <Button light/>
+        <Button/>
     </div>
 )
 
