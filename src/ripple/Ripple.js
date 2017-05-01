@@ -22,8 +22,11 @@ export default ({
                 rippleSpread: defaultSpread
             }
 
-            state = {
-                ripples: {}
+            constructor () {
+                super()
+                this.state = {ripples: {}}
+                this.rippleNodes = {}
+                this.currentCount = 0
             }
 
             componentDidUpdate (prevProps, prevState) {
@@ -31,9 +34,7 @@ export default ({
                     this.addRippleRemoveEventListener(this.getLastKey())
             }
 
-            componentWillUnmount () {
-                Object.values(this.state.ripples).forEach(v => v.endRipple())
-            }
+            componentWillUnmount () {Object.values(this.state.ripples).forEach(v => v.endRipple())}
 
             getDescriptor (x, y) {
                 const
@@ -46,16 +47,9 @@ export default ({
                 }
             }
 
-            getNextKey () {
-                this.currentCount = (this.currentCount || 0) + 1
-                return `ripple${this.currentCount}`
-            }
+            getNextKey () {return `ripple${++this.currentCount}`}
 
-            getLastKey () {
-                return `ripple${this.currentCount}`
-            }
-
-            rippleNodes = {}
+            getLastKey () {return `ripple${this.currentCount}`}
 
             rippleShouldTrigger (isTouch) {
                 const shouldStart = isTouch || !this.touchCache
@@ -124,51 +118,32 @@ export default ({
             doRipple = () => (!this.props.disabled && this.props.ripple)
 
             handleMouseDown = (event) => {
-                if (this.props.onMouseDown) this.props.onMouseDown(event);
-                if (this.doRipple()) {
-                    const { x, y } = events.getMousePosition(event);
-                    this.animateRipple(x, y, false);
-                }
+                if (this.props.onMouseDown) this.props.onMouseDown(event)
+                if (this.doRipple()) this.animateRipple(...events.getMousePosition(event), false)
             };
 
             handleTouchStart = (event) => {
                 if (this.props.onTouchStart) this.props.onTouchStart(event);
-                if (this.doRipple()) {
-                    const { x, y } = events.getTouchPosition(event);
-                    this.animateRipple(x, y, true);
-                }
+                if (this.doRipple()) this.animateRipple(...events.getTouchPosition(event), true)
             };
 
             renderRipple (key, className, {active, left, restarting, top, width}) {
                 const
-                    transform = `translate3d(${-width / 2 + left}rem, ${-width / 2 + top}rem, 0) scale(${restarting ? 0 : 1})`,
-                    _transform = prefixer({transform}, {width, height: width}),
+                    transform = `translate3d(${-width / 2 + left}px, ${-width / 2 + top}px, 0) scale(${restarting ? 0 : 1})`,
+                    _style = {transform, width, height: width},
                     _class = classes(style.ripple, {
                         [style.rippleActive]: active,
-                        [style.rippleRestarting]: restarting,
-                        [key]: true //REMOVE
+                        [style.rippleRestarting]: restarting
                     }, className)
-
-                console.log('renderRipple', key, _transform, _class)
-
+                console.log('renderRipple', key, _class, _style, this.rippleNodes[key])
                 return (
                     <span key={key} class={style.rippleWrapper} {...props}>
-                        <span
-                            class={_class}
-                            ref={node => {if (node) this.rippleNodes[key] = node}}
-                            style={_transform}
-                        />
+                        <span class={_class} ref={node => {if (node) this.rippleNodes[key] = node}} style={_style}/>
                     </span>
                 )
             }
 
-
-            render (props, {ripples}) {
-                const {
-                    ripple, rippleClass,
-                    onRippleEnded, rippleCentered, rippleMultiple, rippleSpread,
-                    children, ...other } = props
-                console.log('render')
+            render ({ripple, rippleClass, onRippleEnded, rippleCentered, rippleMultiple, rippleSpread, children, ...other}, {ripples}) {
                 return <ComposedComponent {...{
                     ...ripple && {onMouseDown: this.handleMouseDown, onTouchStart: this.handleTouchStart},
                     children: ripple ? children.concat(Object.entries(ripples).map(([k, v]) => this.renderRipple(k, rippleClass, v))) : children,
