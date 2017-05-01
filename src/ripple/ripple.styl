@@ -5,16 +5,8 @@
 ripple-duration = 800ms
 ripple-final-opacity = .3
 ripple-size = 15 rem
-
-ripple()
-    position absolute
-    top 50%
-    left 50%
-    z-index 100
-    pointer-events none
-    background-color currentColor
-    border-radius 50%
-    transform-origin 50% 50%
+z-index-normal = 1
+z-index-high = 100
 
 .rippleWrapper
     position absolute
@@ -22,11 +14,18 @@ ripple()
     right 0
     bottom 0
     left 0
-    z-index 1
+    z-index z-index-normal
     pointer-events none
 
 .ripple
-    ripple()
+    position absolute
+    top 50%
+    left 50%
+    z-index z-index-high
+    pointer-events none
+    background-color currentColor
+    border-radius 50%
+    transform-origin 50% 50%
     transition-duration ripple-duration
     &.rippleRestarting
         opacity ripple-final-opacity
