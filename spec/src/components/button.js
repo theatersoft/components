@@ -1,8 +1,9 @@
 import {h} from 'preact'
 import {Button, classes} from '@theatersoft/components'
 
-export default ({light, inverse = !light}) => (
-    <section class={classes({light})}>
+export default ({light}) => {
+    const inverse = !light
+    return <section class={classes({light})}>
         <Button icon="cross" label="Flat" flat {...{inverse}}/>
         <Button label="Flat" primary {...{inverse}}/>
         <Button label="Flat" accent {...{inverse}}/>
@@ -13,4 +14,4 @@ export default ({light, inverse = !light}) => (
         <Button label="8" floating primary mini {...{inverse}}/>
         <Button icon="cross" floating accent mini {...{inverse}}/>
     </section>
-)
+}
