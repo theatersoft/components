@@ -117,18 +117,6 @@ export default ({
                 return endRipple
             }
 
-            doRipple = () => (!this.props.disabled && this.props.ripple)
-
-            handleMouseDown = (event) => {
-                if (this.props.onMouseDown) this.props.onMouseDown(event)
-                if (this.doRipple()) this.animateRipple(...mousePosition(event), false)
-            }
-
-            handleTouchStart = (event) => {
-                if (this.props.onTouchStart) this.props.onTouchStart(event);
-                if (this.doRipple()) this.animateRipple(...touchPosition(event), true)
-            }
-
             renderRipple (key, className, {active, left, restarting, top, width}) {
                 const
                     transform = `translate3d(${-width / 2 + left}px, ${-width / 2 + top}px, 0) scale(${restarting ? 0 : 1})`,
@@ -145,10 +133,21 @@ export default ({
                 )
             }
 
-            render ({ripple, rippleClass, onRippleEnded, rippleCentered, rippleMultiple, rippleSpread, children, ...other}, {ripples}) {
+            render ({ripple, rippleClass, disabled, onRippleEnded, rippleCentered, rippleMultiple, rippleSpread, children, ...other}, {ripples}) {
+                const
+                    doRipple = !disabled && ripple,
+                    onMouseDown = e => {
+                        if (this.props.onMouseDown) this.props.onMouseDown(e)
+                        if (doRipple) this.animateRipple(...mousePosition(e), false)
+                    },
+                    onTouchStart = e => {
+                        if (this.props.onTouchStart) this.props.onTouchStart(e)
+                        if (doRipple) this.animateRipple(...touchPosition(e), true)
+                    }
                 return <ComposedComponent {...{
-                    ...ripple && {onMouseDown: this.handleMouseDown, onTouchStart: this.handleTouchStart},
-                    children: ripple ? children.concat(Object.entries(ripples).map(([k, v]) => this.renderRipple(k, rippleClass, v))) : children,
+                    ...doRipple && {onMouseDown, onTouchStart},
+                    children: doRipple ? children.concat(Object.entries(ripples).map(([k, v]) => this.renderRipple(k, rippleClass, v))) : children,
+                    disabled,
                     ...other
                 }}/>
             }
