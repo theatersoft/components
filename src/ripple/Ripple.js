@@ -2,8 +2,15 @@ import {h, Component} from 'preact'
 import style from './ripple.styl'
 import {classes} from '../classes'
 
-import events from '../utils/events'
-import prefixer from '../utils/prefixer'
+const
+    mousePosition = event => ([
+        event.pageX - (window.scrollX || window.pageXOffset),
+        event.pageY - (window.scrollY || window.pageYOffset)
+    ]),
+    touchPosition = event => ([
+        event.touches[0].pageX - (window.scrollX || window.pageXOffset),
+        event.touches[0].pageY - (window.scrollY || window.pageYOffset)
+    ])
 
 export default ({
     centered: defaultCentered = false,
@@ -80,52 +87,47 @@ export default ({
             }
 
             addRippleRemoveEventListener (rippleKey) {
-                const self = this // TODO
-                const rippleNode = this.rippleNodes[rippleKey]
-                events.addEventListenerOnTransitionEnded(rippleNode, function onOpacityEnd (e) {
-                    if (e.propertyName === 'opacity') {
-                        if (self.props.onRippleEnded) self.props.onRippleEnded(e)
-                        events.removeEventListenerOnTransitionEnded(self.rippleNodes[rippleKey], onOpacityEnd)
-// TODO
-                        delete self.rippleNodes[rippleKey]
-                        const {[rippleKey]: _, ...ripples} = self.state.ripples
-                        self.setState({ripples})
+                const
+                    rippleNode = this.rippleNodes[rippleKey],
+                    onOpacityEnd = e => {
+                        if (e.propertyName === 'opacity') {
+                            if (this.props.onRippleEnded) this.props.onRippleEnded(e)
+                            rippleNode.removeEventListener('transitionend', onOpacityEnd)
+                            delete this.rippleNodes[rippleKey]
+                            const {[rippleKey]: _, ...ripples} = this.state.ripples
+                            this.setState({ripples})
+                        }
                     }
-                })
+                rippleNode.addEventListener('transitionend', onOpacityEnd)
             }
 
             addRippleDeactivateEventListener (isTouch, rippleKey) {
                 const
                     eventType = isTouch ? 'touchend' : 'mouseup',
-                    endRipple = this.createRippleDeactivateCallback(eventType, rippleKey)
+                    endRipple = () => {
+                        document.removeEventListener(eventType, endRipple)
+                        this.setState({
+                            ripples: {
+                                ...this.state.ripples,
+                                [rippleKey]: Object.assign({}, this.state.ripples[rippleKey], {active: false})
+                            }
+                        })
+                    }
                 document.addEventListener(eventType, endRipple)
                 return endRipple
-            }
-
-            createRippleDeactivateCallback (eventType, rippleKey) {
-                const self = this; //TODO
-                return function endRipple () {
-                    document.removeEventListener(eventType, endRipple);
-                    self.setState({
-                        ripples: {
-                            ...self.state.ripples,
-                            [rippleKey]: Object.assign({}, self.state.ripples[rippleKey], {active: false}), //TODO
-                        }
-                    });
-                };
             }
 
             doRipple = () => (!this.props.disabled && this.props.ripple)
 
             handleMouseDown = (event) => {
                 if (this.props.onMouseDown) this.props.onMouseDown(event)
-                if (this.doRipple()) this.animateRipple(...events.getMousePosition(event), false)
-            };
+                if (this.doRipple()) this.animateRipple(...mousePosition(event), false)
+            }
 
             handleTouchStart = (event) => {
                 if (this.props.onTouchStart) this.props.onTouchStart(event);
-                if (this.doRipple()) this.animateRipple(...events.getTouchPosition(event), true)
-            };
+                if (this.doRipple()) this.animateRipple(...touchPosition(event), true)
+            }
 
             renderRipple (key, className, {active, left, restarting, top, width}) {
                 const
