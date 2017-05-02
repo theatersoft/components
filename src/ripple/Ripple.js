@@ -140,11 +140,11 @@ export default ({
                         if (this.props.onTouchStart) this.props.onTouchStart(e)
                         if (doRipple) this.animateRipple(...touchPosition(e), true)
                     }
-                return <ComposedComponent {...{
+                return h(ComposedComponent, {
                     ...doRipple && {onMouseDown, onTouchStart},
                     children: doRipple ? children.concat(Object.entries(ripples).map(([k, v]) => this.renderRipple(k, rippleClass, v))) : children,
                     disabled,
                     ...other
-                }}/>
+                })
             }
         }
