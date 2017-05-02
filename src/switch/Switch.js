@@ -1,6 +1,6 @@
 import {h, Component} from 'preact'
 import Ripple from '../ripple'
-import Thumb from './Thumb.js'
+import thumbFactory from './Thumb.js'
 import style from './switch.styl'
 
 const switchFactory = Thumb => class extends Component {
@@ -16,7 +16,7 @@ const switchFactory = Thumb => class extends Component {
             <label class={disabled ? style.disabled : style.field}
                    onClick={this.handleToggle}>
                     <span class={checked ? style.on : style.off}>
-                        <Thumb disabled={disabled}/>
+                        {h(Thumb, {disabled})}
                     </span>
                 {label && <span>{label}</span>}
             </label>
@@ -24,4 +24,7 @@ const switchFactory = Thumb => class extends Component {
     }
 }
 
-export const Switch = switchFactory(Thumb(Ripple({centered: true, spread: 2.6})))
+// ^^^ TODO dist build mangles Thumb argument, breaks JSX:
+//                         <Thumb disabled={disabled}/>
+
+export const Switch = switchFactory(thumbFactory(Ripple({centered: true, spread: 2.6})))
