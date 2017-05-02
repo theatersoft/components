@@ -38,44 +38,40 @@ export default ({
 
             componentDidUpdate (prevProps, prevState) {
                 if (Object.keys(prevState.ripples).length < Object.keys(this.state.ripples).length)
-                    this.addRippleRemoveEventListener(this.getLastKey())
+                    this.addRippleRemoveEventListener(this.currentKey)
             }
 
             componentWillUnmount () {Object.values(this.state.ripples).forEach(v => v.endRipple())}
 
-            getDescriptor (x, y) {
-                const
-                    {left, top, height, width} = this.base.getBoundingClientRect(),
-                    {rippleCentered: centered, rippleSpread: spread} = this.props
-                return {
-                    left: centered ? 0 : x - left - width / 2,
-                    top: centered ? 0 : y - top - height / 2,
-                    width: width * spread
-                }
-            }
-
-            getNextKey () {return `ripple${++this.currentCount}`}
-
-            getLastKey () {return `ripple${this.currentCount}`}
-
-            rippleShouldTrigger (isTouch) {
-                const shouldStart = isTouch || !this.touchCache
-                this.touchCache = isTouch
-                return shouldStart
-            }
-
             animateRipple (x, y, isTouch) {
-                if (this.rippleShouldTrigger(isTouch)) {
+                const
+                    getNextKey = () => (this.currentKey = `ripple${++this.currentCount}`),
+                    rippleShouldTrigger = isTouch => {
+                        const shouldStart = isTouch || !this.touchCache
+                        this.touchCache = isTouch
+                        return shouldStart
+                    },
+                    getDescriptor = (x, y) => {
+                        const
+                            {left, top, height, width} = this.base.getBoundingClientRect(),
+                            {rippleCentered: centered, rippleSpread: spread} = this.props
+                        return {
+                            left: centered ? 0 : x - left - width / 2,
+                            top: centered ? 0 : y - top - height / 2,
+                            width: width * spread
+                        }
+                    }
+                if (rippleShouldTrigger(isTouch)) {
                     const
-                        {top, left, width} = this.getDescriptor(x, y),
+                        {top, left, width} = getDescriptor(x, y),
                         noRipplesActive = Object.keys(this.state.ripples).length === 0,
-                        key = (this.props.rippleMultiple || noRipplesActive) ? this.getNextKey() : this.getLastKey(),
+                        key = this.props.rippleMultiple || noRipplesActive ? getNextKey() : this.currentKey,
                         endRipple = this.addRippleDeactivateEventListener(isTouch, key),
                         initialState = {active: false, restarting: true, top, left, width, endRipple},
                         runningState = {active: true, restarting: false},
                         ripples = {...this.state.ripples, [key]: initialState}
                     this.setState({ripples}, () => {
-                        if (this.rippleNodes[key]) this.rippleNodes[key].offsetWidth //reflow?
+                        //if (this.rippleNodes[key]) this.rippleNodes[key].offsetWidth //reflow?
                         this.setState({
                             ripples: {
                                 ...this.state.ripples,
