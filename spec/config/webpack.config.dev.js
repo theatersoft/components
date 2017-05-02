@@ -81,8 +81,8 @@ module.exports = {
             // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
             'react-native': 'react-native-web',
             // Preact-compat aliases
-            'react': 'preact-compat',
-            'react-dom': 'preact-compat',
+            'react': 'preact',
+            'react-dom': 'preact',
         }
     },
 
