@@ -1,8 +1,8 @@
 import {h, render} from 'preact'
-import '../../spec/src/resize'
-import App from '../../spec/src/App'
+import '../../src/resize'
+import App from '../../src/App'
 import './index.styl'
-import svg from '../../spec/res/_icons.svg'
+import svg from '../../res/_icons.svg'
 
 const div = document.createElement('div')
 div.innerHTML = svg
