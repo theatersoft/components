@@ -17,6 +17,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.2.11",
     "babel-preset-babili": "0.0.8",
     "chokidar": "^1.6.1",
+    "http-server": "^0.10.0",
     "livereload": "^0.6.0",
     "postcss-import": "^9.1.0",
     "postcss-modules": "^0.6.4",
@@ -36,6 +37,7 @@
   },
   "scripts": {
     "link": "npm link @theatersoft/bus @theatersoft/components",
-    "build": "node build.js"
+    "build": "node build.js",
+    "start": "http-server public"
   }
 }
