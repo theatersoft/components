@@ -10,7 +10,8 @@
   "scripts": {
     "build": "node build.js && ls -l dist",
     "build:dist": "DIST=true npm run build",
-    "build-watch": "node build.js watch",
+    "clean": "node build.js clean",
+    "watch": "node build.js watch",
     "link": "npm link @theatersoft/bus",
     "publish": "node build.js publish"
   },

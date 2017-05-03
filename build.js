@@ -150,7 +150,6 @@ const targets = {
 
     async all () {
         console.log('target all')
-        targets.clean()
         targets.res()
         await targets.bundle()
         targets.package()
