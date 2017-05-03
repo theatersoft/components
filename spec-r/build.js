@@ -25,11 +25,12 @@ const targets =
             plugins: [
                 postcss({
                     preprocessor: (content, id) => new Promise((resolve, reject) => {
+                        console.log('preprocess', id)
                         const renderer = stylus(content, {
                             filename: id,
                             sourcemap: {inline: true},
                             compress: false,
-                            paths: ['styl', 'node_modules']
+                            paths: ['node_modules']
                         })
                         renderer.render((err, code) =>
                             err ? reject(err) : resolve({code, map: renderer.sourcemap})
@@ -40,8 +41,7 @@ const targets =
                     //extract: 'dist/theatersoft.css',
                     plugins: [
                         postcssModules({
-                            getJSON(id, exportTokens) {cssExportMap[id] = exportTokens},
-                            globalModulePaths: ['@theatersoft/components/components.css']
+                            getJSON(id, exportTokens) {cssExportMap[id] = exportTokens}
                         }),
                         postcssImport()
                     ],
