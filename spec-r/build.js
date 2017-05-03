@@ -13,8 +13,9 @@ const
     postcss = require('rollup-plugin-postcss'),
     stylus = require('stylus'),
     postcssModules = require('postcss-modules'),
-    cssExportMap = {},
+    cssExports = {},
     postcssImport = require("postcss-import"),
+    string = require('rollup-plugin-string'),
     options = {
         entry: 'src/index.js',
         plugins: [
@@ -36,11 +37,11 @@ const
                 //extract: 'dist/theatersoft.css',
                 plugins: [
                     postcssModules({
-                        getJSON(id, exportTokens) {cssExportMap[id] = exportTokens}
+                        getJSON(id, exportTokens) {cssExports[id] = exportTokens}
                     }),
                     postcssImport()
                 ],
-                getExport: id => cssExportMap[id]
+                getExport: id => cssExports[id]
             }),
             nodeResolve({
                 jsnext: true,
@@ -51,9 +52,10 @@ const
             replace({
                 'process.env.NODE_ENV': JSON.stringify('production')
             }),
+            string({include: '/**/*.svg'}),
             //sourcemaps(),
             babel({
-                exclude: 'node_modules/**',
+                exclude: ['node_modules/**', '/**/*.svg'],
                 plugins: [
                     [require("babel-plugin-transform-object-rest-spread"), {useBuiltIns: true}],
                     require("babel-plugin-transform-class-properties"),

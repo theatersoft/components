@@ -30,6 +30,7 @@
     "rollup-plugin-postcss": "^0.4.0",
     "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-sourcemaps": "^0.4.1",
+    "rollup-plugin-string": "^2.0.2",
     "rollup-watch": "^2.5.0",
     "serve-static": "^1.12.2",
     "shelljs": "^0.7.0",
