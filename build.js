@@ -86,7 +86,8 @@ const targets = {
                     extract: `dist/${name}.css`,
                     plugins: [
                         postcssModules({
-                            getJSON(id, exportTokens) {cssExportMap[id] = exportTokens}
+                            getJSON(id, exportTokens) {cssExportMap[id] = exportTokens},
+                            generateScopedName: '_[name]_[local]', // _[hash:2]
                         })
                     ],
                     getExport: id => cssExportMap[id]
