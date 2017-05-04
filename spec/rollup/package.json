@@ -22,7 +22,7 @@
     "postcss-import": "^9.1.0",
     "postcss-modules": "^0.6.4",
     "preact": "^6.4.0",
-    "rollup": "^0.36.4",
+    "rollup": "^0.41.6",
     "rollup-plugin-alias": "^1.2.0",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-commonjs": "^5.0.5",
