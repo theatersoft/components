@@ -27,4 +27,4 @@ const switchFactory = Thumb => class extends Component {
 // ^^^ TODO dist build mangles Thumb argument, breaks JSX:
 //                         <Thumb disabled={disabled}/>
 
-export const Switch = switchFactory(thumbFactory(Ripple({centered: true, spread: 2.6})))
+export const Switch = switchFactory(thumbFactory(Ripple({centered: true, spread: 4.2})))
