@@ -6,28 +6,16 @@ import Ripple from '../ripple'
 
 export const Button = Ripple({centered: false})(
     class extends Component {
-        render (props) {
-            const {
-                accent = false,
-                disabled,
-                floating = false,
-                icon,
-                inverse,
-                label,
-                mini = false,
-                primary = false,
-                raised = false,
-                ...others
-                } = props
+        render ({icon, label, inverse, mini, primary, accent, floating, raised, class: _class, ...props}) {
             return (
                 <button class={classes(
-                props.class,
+                _class,
                 primary ? style.primary : accent ? style.accent : style.neutral,
                 raised ?  style.raised : floating ?  style.floating : style.flat,
                 inverse && style.inverse,
                 mini && style.mini
-            )} {...{disabled}}>
-                    {icon && <Icon icon={icon} class={style.icon} small/>}
+            )} {...props}>
+                    {icon && <Icon icon={icon} class={style.icon} small disabled={props.disabled} />}
                     {label}
                 </button>
             )
