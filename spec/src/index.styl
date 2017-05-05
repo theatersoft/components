@@ -1,35 +1,37 @@
 body
-  background #000
-  position absolute
-  left 50%
-  top 50%
-  user-select none
+    background #000
+    position absolute
+    left 50%
+    top 50%
+    user-select none
+
 body,
 html
-  width 100%
-  height 100%
-  margin 0
-  padding 0
-  overflow hidden
-  user-select none
+    width 100%
+    height 100%
+    margin 0
+    padding 0
+    overflow hidden
+    user-select none
 
 @font-face
-  font-family 'Alegreya Sans SC'
-  font-style normal
-  font-weight 400
-  src url("/res/alegreyasanssc.ttf")
+    font-family 'Alegreya Sans SC'
+    font-style normal
+    font-weight 400
+    src url("/res/alegreyasanssc.ttf")
 
-#video
-#ui
-  position absolute
-  width 100%
-  height 100%
-  margin 0
-  padding 0
-#ui
-  font-size 8rem
-  font-family Alegreya Sans SC
-  color #e0e0e0
-#video
-  background-image url(http://192.168.1.16:5402)
-  background-size contain
+:global
+    #video
+    #ui
+        position absolute
+        width 100%
+        height 100%
+        margin 0
+        padding 0
+    #ui
+        font-size 8rem
+        font-family Alegreya Sans SC
+        color #e0e0e0
+    #video
+        background-image url(http://192.168.1.16:5402)
+        background-size contain

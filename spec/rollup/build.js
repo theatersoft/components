@@ -37,7 +37,8 @@ const
                 //extract: 'dist/theatersoft.css',
                 plugins: [
                     postcssModules({
-                        getJSON(id, exportTokens) {cssExports[id] = exportTokens}
+                        getJSON(id, exportTokens) {cssExports[id] = exportTokens},
+                        globalModulePaths: ['components.css']
                     }),
                     postcssImport()
                 ],
