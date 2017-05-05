@@ -39,7 +39,7 @@
   "scripts": {
     "link": "npm link @theatersoft/bus @theatersoft/components",
     "build": "node build.js",
-    "start": "http-server public",
+    "start": "http-server -c-1",
     "watch": "node build.js watch"
   }
 }
