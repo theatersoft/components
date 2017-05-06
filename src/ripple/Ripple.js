@@ -69,7 +69,6 @@ export default ({
                 const
                     {left, top, height, width} = this.base.getBoundingClientRect(),
                     {rippleCentered: centered, rippleSpread: spread} = this.props
-                console.log('getDescriptor', {left, top, height, width})
                 return {
                     left: centered ? 0 : x - left - width / 2,
                     top: centered ? 0 : y - top - height / 2,
@@ -117,11 +116,9 @@ export default ({
             transform = `translate3d(${-width / 2 + left}px, ${-width / 2 + top}px, 0) scale(${restarting ? 0 : 1})`,
             _style = {transform, width, height: width},
             _class = classes(style.ripple, {[style.rippleActive]: active, [style.rippleRestarting]: restarting}, className)
-        console.log('Ripple.renderRipple', key, _class, _style, this.rippleNodes[key])
-        console.log({active, restarting})
         return <span key={key} class={style.rippleWrapper || "rippleWrapper"} {...props}>
                 <span class={_class} style={_style}
-                    ref={node => {if (node) this.rippleNodes[key] = node; console.log('ref', this.rippleNodes)}}
+                    ref={node => {if (node) this.rippleNodes[key] = node}}
                 />
             </span>
     }
@@ -137,7 +134,6 @@ export default ({
                 if (this.props.onTouchStart) this.props.onTouchStart(e)
                 if (doRipple) this.animateRipple(...touchPosition(e), true)
             }
-        console.log('Ripple.render', {doRipple, ComposedComponent})
         return h(ComposedComponent, {
                 ...doRipple && {onMouseDown, onTouchStart},
                 disabled,
