@@ -11,6 +11,7 @@ squared-min-width = unit * 9
 squared-padding = 0 unit * 0.8
 
 button()
+    position relative
     display flex
     height height
     text-align center
@@ -22,6 +23,8 @@ button()
     text()
     text-transform uppercase
     transition box-shadow 0.2s animation-curve-fast-out-linear-in, background-color 0.2s animation-curve-default, color 0.2s animation-curve-default
+    & :global .rippleWrapper
+        overflow hidden
 
 squared()
     min-width squared-min-width
