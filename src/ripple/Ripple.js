@@ -1,6 +1,7 @@
 import {h, Component} from 'preact'
 import style from './ripple.styl'
 import {classes} from '../classes'
+import {executor} from '@theatersoft/bus'
 
 const
     mousePosition = event => ([
@@ -78,18 +79,18 @@ export default ({
                     width: width * spread
                 }
             },
-            addEndRipple = key => {
+            addEndRipple = (key, started) => {
                 const
                     eventType = isTouch ? 'touchend' : 'mouseup',
                     endRipple = () => {
                         document.removeEventListener(eventType, endRipple)
                         console.log('endRipple setState', this.state.ripples)
-                        this.setState({
-                            ripples: {
-                                ...this.state.ripples,
-                                [key]: {...this.state.ripples[key], active: false}
-                            }
-                        }, () => console.log('endRipple setState cb', this.state.ripples))
+                        started.promise.then(() => this.setState({
+                                ripples: {
+                                    ...this.state.ripples,
+                                    [key]: {...this.state.ripples[key], active: false}
+                                }
+                            }, () => console.log('endRipple setState cb', this.state.ripples)))
                     }
                 document.addEventListener(eventType, endRipple)
                 return endRipple
@@ -99,10 +100,12 @@ export default ({
                 {top, left, width} = getDescriptor(x, y),
                 noRipplesActive = Object.keys(this.state.ripples).length === 0,
                 key = this.props.rippleMultiple || noRipplesActive ? getNextKey() : this.currentKey,
-                endRipple = addEndRipple(key)
+                started = executor(),
+                endRipple = addEndRipple(key, started)
             console.log('restarting')
             this.setState({ripples: {...this.state.ripples, [key]: {active: false, restarting: true, top, left, width, endRipple}}},
                 () => {
+                    started.resolve()
                     if (this.rippleNodes[key]) this.rippleNodes[key].offsetWidth
                     console.log('restarting setState cb', this.state.ripples)
                     console.log('setState active')
