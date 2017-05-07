@@ -41,7 +41,6 @@ export default ({
             const
                 rippleNode = this.rippleNodes[rippleKey],
                 onTransitionEnd = e => {
-                    console.log(e)
                     if (e.propertyName === 'opacity') {
                         if (this.props.onRippleEnded) this.props.onRippleEnded(e)
                         rippleNode.removeEventListener('transitionend', onTransitionEnd)
@@ -52,9 +51,7 @@ export default ({
                 }
             if (rippleNode)
                 rippleNode.addEventListener('transitionend', onTransitionEnd)
-            console.log('added transitionend')
         }
-        console.log('componentDidUpdate')
         if (Object.keys(prevState.ripples).length < Object.keys(this.state.ripples).length)
             addRippleRemoveEventListener(this.currentKey)
     }
@@ -88,28 +85,24 @@ export default ({
                 eventType = isTouch ? 'touchend' : 'mouseup',
                 endRipple = () => {
                     document.removeEventListener(eventType, endRipple)
-                    console.log('endRipple setState', this.state.ripples)
                     started.promise.then(() => this.setState({
                         ripples: {
                             ...this.state.ripples,
                             [key]: {...this.state.ripples[key], active: false}
                         }
-                    }, () => console.log('endRipple setState cb', this.state.ripples)))
+                    }))
                 }
             document.addEventListener(eventType, endRipple)
-            console.log('restarting')
             this.setState({ripples: {...this.state.ripples, [key]: {active: false, restarting: true, top, left, width, endRipple}}},
                 () => {
                     started.resolve()
                     if (this.rippleNodes[key]) this.rippleNodes[key].offsetWidth
-                    console.log('restarting setState cb', this.state.ripples)
-                    console.log('setState active')
                     this.setState({
                         ripples: {
                             ...this.state.ripples,
                             [key]: {...this.state.ripples[key], active: true, restarting: false}
                         }
-                    }, () => console.log('setState active cb', this.state.ripples))
+                    })
                 }
             )
         }
