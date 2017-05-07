@@ -39,18 +39,21 @@ export default ({
         const addRippleRemoveEventListener = rippleKey => {
             const
                 rippleNode = this.rippleNodes[rippleKey],
-                onOpacityEnd = e => {
+                onTransitionEnd = e => {
+                    console.log(e)
                     if (e.propertyName === 'opacity') {
                         if (this.props.onRippleEnded) this.props.onRippleEnded(e)
-                        rippleNode.removeEventListener('transitionend', onOpacityEnd)
+                        rippleNode.removeEventListener('transitionend', onTransitionEnd)
                         delete this.rippleNodes[rippleKey]
                         const {[rippleKey]: _, ...ripples} = this.state.ripples
                         this.setState({ripples})
                     }
                 }
             if (rippleNode)
-                rippleNode.addEventListener('transitionend', onOpacityEnd)
+                rippleNode.addEventListener('transitionend', onTransitionEnd)
+            console.log('added transitionend')
         }
+        console.log('componentDidUpdate')
         if (Object.keys(prevState.ripples).length < Object.keys(this.state.ripples).length)
             addRippleRemoveEventListener(this.currentKey)
     }
@@ -74,53 +77,56 @@ export default ({
                     top: centered ? 0 : y - top - height / 2,
                     width: width * spread
                 }
+            },
+            addEndRipple = key => {
+                const
+                    eventType = isTouch ? 'touchend' : 'mouseup',
+                    endRipple = () => {
+                        document.removeEventListener(eventType, endRipple)
+                        console.log('endRipple setState', this.state.ripples)
+                        this.setState({
+                            ripples: {
+                                ...this.state.ripples,
+                                [key]: {...this.state.ripples[key], active: false}
+                            }
+                        }, () => console.log('endRipple setState cb', this.state.ripples))
+                    }
+                document.addEventListener(eventType, endRipple)
+                return endRipple
             }
         if (rippleShouldTrigger(isTouch)) {
             const
                 {top, left, width} = getDescriptor(x, y),
                 noRipplesActive = Object.keys(this.state.ripples).length === 0,
                 key = this.props.rippleMultiple || noRipplesActive ? getNextKey() : this.currentKey,
-                addRippleDeactivateEventListener = (isTouch, rippleKey) => {
-                    const
-                        eventType = isTouch ? 'touchend' : 'mouseup',
-                        endRipple = () => {
-                            document.removeEventListener(eventType, endRipple)
-                            this.setState({
-                                ripples: {
-                                    ...this.state.ripples,
-                                    [rippleKey]: Object.assign({}, this.state.ripples[rippleKey], {active: false})
-                                }
-                            })
+                endRipple = addEndRipple(key)
+            console.log('restarting')
+            this.setState({ripples: {...this.state.ripples, [key]: {active: false, restarting: true, top, left, width, endRipple}}},
+                () => {
+                    if (this.rippleNodes[key]) this.rippleNodes[key].offsetWidth
+                    console.log('restarting setState cb', this.state.ripples)
+                    console.log('setState active')
+                    this.setState({
+                        ripples: {
+                            ...this.state.ripples,
+                            [key]: {...this.state.ripples[key], active: true, restarting: false}
                         }
-                    document.addEventListener(eventType, endRipple)
-                    return endRipple
-                },
-                endRipple = addRippleDeactivateEventListener(isTouch, key),
-                initialState = {active: false, restarting: true, top, left, width, endRipple},
-                runningState = {active: true, restarting: false},
-                ripples = {...this.state.ripples, [key]: initialState}
-            this.setState({ripples}, () => {
-                if (this.rippleNodes[key]) this.rippleNodes[key].offsetWidth
-                this.setState({
-                    ripples: {
-                        ...this.state.ripples,
-                        [key]: Object.assign({}, this.state.ripples[key], runningState)
-                    }
-                })
-            })
+                    }, () => console.log('setState active cb', this.state.ripples))
+                }
+            )
         }
     }
 
     renderRipple (key, className, {active, left, restarting, top, width}) {
-        const
-            transform = `translate3d(${-width / 2 + left}px, ${-width / 2 + top}px, 0) scale(${restarting ? 0 : 1})`,
-            _style = {transform, width, height: width},
-            _class = classes(style.ripple, {[style.rippleActive]: active, [style.rippleRestarting]: restarting}, className)
-        return <span key={key} class={style.rippleWrapper || "rippleWrapper"} {...props}>
-                <span class={_class} style={_style}
+        return (
+            <span key={key} class={style.rippleWrapper || "rippleWrapper"} {...props}>
+                <span
+                    class={classes(style.ripple, {[style.rippleActive]: active, [style.rippleRestarting]: restarting}, className)}
+                    style={{transform: `translate3d(${-width / 2 + left}px, ${-width / 2 + top}px, 0) scale(${restarting ? 0 : 1})`, width, height: width}}
                     ref={node => {if (node) this.rippleNodes[key] = node}}
                 />
             </span>
+        )
     }
 
     render ({ripple, rippleClass, disabled, onRippleEnded, rippleCentered, rippleMultiple, rippleSpread, children, ...other}, {ripples}) {
