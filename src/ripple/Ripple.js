@@ -78,22 +78,6 @@ export default ({
                     top: centered ? 0 : y - top - height / 2,
                     width: width * spread
                 }
-            },
-            addEndRipple = (key, started) => {
-                const
-                    eventType = isTouch ? 'touchend' : 'mouseup',
-                    endRipple = () => {
-                        document.removeEventListener(eventType, endRipple)
-                        console.log('endRipple setState', this.state.ripples)
-                        started.promise.then(() => this.setState({
-                                ripples: {
-                                    ...this.state.ripples,
-                                    [key]: {...this.state.ripples[key], active: false}
-                                }
-                            }, () => console.log('endRipple setState cb', this.state.ripples)))
-                    }
-                document.addEventListener(eventType, endRipple)
-                return endRipple
             }
         if (rippleShouldTrigger(isTouch)) {
             const
@@ -101,7 +85,18 @@ export default ({
                 noRipplesActive = Object.keys(this.state.ripples).length === 0,
                 key = this.props.rippleMultiple || noRipplesActive ? getNextKey() : this.currentKey,
                 started = executor(),
-                endRipple = addEndRipple(key, started)
+                eventType = isTouch ? 'touchend' : 'mouseup',
+                endRipple = () => {
+                    document.removeEventListener(eventType, endRipple)
+                    console.log('endRipple setState', this.state.ripples)
+                    started.promise.then(() => this.setState({
+                        ripples: {
+                            ...this.state.ripples,
+                            [key]: {...this.state.ripples[key], active: false}
+                        }
+                    }, () => console.log('endRipple setState cb', this.state.ripples)))
+                }
+            document.addEventListener(eventType, endRipple)
             console.log('restarting')
             this.setState({ripples: {...this.state.ripples, [key]: {active: false, restarting: true, top, left, width, endRipple}}},
                 () => {
