@@ -5,7 +5,6 @@ import style from './switch.styl'
 
 const switchFactory = Thumb => class extends Component {
     handleToggle = ev => {
-        console.log('handleToggle', this.props, ev)
         if (!this.props.disabled && this.props.onChange) {
             this.props.onChange(!this.props.checked, ev)
         }
@@ -23,8 +22,5 @@ const switchFactory = Thumb => class extends Component {
         )
     }
 }
-
-// ^^^ TODO dist build mangles Thumb argument, breaks JSX:
-//                         <Thumb disabled={disabled}/>
 
 export const Switch = switchFactory(thumbFactory(Ripple({centered: true, spread: 4.2})))
