@@ -30,7 +30,7 @@
     "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-sourcemaps": "^0.4.1",
     "rollup-plugin-string": "^2.0.2",
-    "rollup-watch": "^2.5.0",
+    "rollup-watch": "^3.2.2",
     "serve-static": "^1.12.2",
     "shelljs": "^0.7.0",
     "stylus": "^0.54.5"
@@ -38,7 +38,6 @@
   "scripts": {
     "link": "npm link @theatersoft/bus @theatersoft/components",
     "build": "node build.js",
-    "start": "http-server -c-1",
-    "watch": "node build.js watch"
+    "start": "node build.js watch & http-server -c-1 & wait"
   }
 }
