@@ -11,7 +11,7 @@ export {
 
 export {Button} from './button'
 export {Icon} from './icon'
-export {default as Ripple} from './ripple'
+export {List, ListItem} from './list'
 export {Switch} from './switch'
 export {default as focus, mixinFocusable, Focuser} from './focus'
 export {classes} from './classes'
