@@ -3,10 +3,11 @@ import Thumb from './Thumb.js'
 import style from './switch.styl'
 
 export const Switch = class extends Component {
-    handleToggle = ev => {
+    handleToggle = e => {
         if (!this.props.disabled && this.props.onChange) {
-            this.props.onChange(!this.props.checked, ev)
+            this.props.onChange(!this.props.checked, e)
         }
+        e.stopPropagation()
     }
 
     render ({label, checked = false, disabled = false}) {

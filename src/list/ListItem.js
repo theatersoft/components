@@ -6,10 +6,11 @@ import Ripple from '../ripple'
 
 const Action = vnode => {
     const
-        {onClick, onMouseDown} = vnode.attributes,
-        stop = e =>e.stopPropagation()
+        //{onClick, onMouseDown} = vnode.attributes,
+        //stopRipple = onClick && !onMouseDown
+        stop = e => e.stopPropagation()
     return (
-        <span class={style.action} onMouseDown={stop} onClick={stop}>
+        <span class={style.action} onMouseDown={stop}>
             {vnode}
         </span>
     )
