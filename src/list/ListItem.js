@@ -18,8 +18,8 @@ const Action = vnode => {
 export const ListItem = Ripple({centered: false, isRipple: true})(class extends Component {
     render ({icon, label, children, ...props}) {
         return h('li', {...props, class: classes(props.class, style.item)},
-            <span>{icon && <Icon icon={icon} class={style.icon} small disabled={props.disabled}/>}</span>,
-            <span>{label}</span>,
+            icon && <Icon icon={icon} class={style.icon} small disabled={props.disabled}/>,
+            <span class={style.content}><span class={style.text}>{label}</span></span>,
             children && children.map(vnode => !vnode.attributes.isRipple ? Action(vnode) : vnode)
         )
     }

@@ -7,9 +7,30 @@ item-min-height = 10rem
 .list
     display inline-block
     list-style none
+    width 100%
 
 .item
     position relative
+    display flex
+    align-items center
+    padding 0 2rem
     min-height item-min-height
     & :global .rippleWrapper
         overflow hidden
+
+.icon
+    flex 0 0 auto
+    margin 2rem 2rem 2rem 0
+
+.content
+    display flex
+    flex-direction  column
+    flex-grow 1
+
+.text
+    display block
+
+.action
+    display flex
+    flex 0 0 auto
+    margin 2rem 0 2rem 2rem
