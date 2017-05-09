@@ -61,7 +61,8 @@ thumb-focus()
     transition-property left
     .ripple
         transition-duration ripple-duration
-
+    & :global .rippleWrapper
+        overflow visible
 .on
     switch()
     background track-on-color
