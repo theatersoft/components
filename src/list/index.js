@@ -1,2 +1,2 @@
-export {List} from './List'
+export {List, ListSubheader} from './List'
 export {ListItem} from './ListItem'
