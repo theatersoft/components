@@ -9,7 +9,7 @@ export class Icon extends Component {
             <span
                 class={classes('icon', props.class, small && 'small')}
                 onClick={cb}>
-                <svg id={`icon-${icon}`}>
+                <svg>
                     <use href={`#svg-${icon}`}/>
                 </svg>
             </span>
