@@ -3,15 +3,14 @@ import style from './ripple.styl'
 import {classes} from '../classes'
 import {executor} from '@theatersoft/bus'
 
-const
-    mousePosition = event => ([
-        event.pageX - (window.scrollX || window.pageXOffset),
-        event.pageY - (window.scrollY || window.pageYOffset)
-    ]),
-    touchPosition = event => ([
-        event.touches[0].pageX - (window.scrollX || window.pageXOffset),
-        event.touches[0].pageY - (window.scrollY || window.pageYOffset)
-    ])
+export const mousePosition = event => ([
+    event.pageX - (window.scrollX || window.pageXOffset),
+    event.pageY - (window.scrollY || window.pageYOffset)
+])
+export const touchPosition = event => ([
+    event.touches[0].pageX - (window.scrollX || window.pageXOffset),
+    event.touches[0].pageY - (window.scrollY || window.pageYOffset)
+])
 
 export default ({
     centered: defaultCentered = false,
