@@ -16,6 +16,7 @@ export default ({
     centered: defaultCentered = false,
     class: defaultClass = '',
     multiple: defaultMultiple = true,
+    scaled: defaultScaled = true,
     spread: defaultSpread = 2,
     ...props
     }) => ComposedComponent => class extends Component {
@@ -25,6 +26,7 @@ export default ({
         rippleCentered: defaultCentered,
         rippleClass: defaultClass,
         rippleMultiple: defaultMultiple,
+        rippleScaled: defaultScaled,
         rippleSpread: defaultSpread
     }
 
@@ -57,7 +59,7 @@ export default ({
 
     componentWillUnmount () {Object.values(this.state.ripples).forEach(v => v.endRipple())}
 
-    render ({ripple, rippleClass, disabled, onRippleEnded, rippleCentered, rippleMultiple, rippleSpread, children, ...other}, {ripples}) {
+    render ({ripple, rippleClass, disabled, onRippleEnded, rippleCentered, rippleMultiple, rippleScaled, rippleSpread, children, ...other}, {ripples}) {
         const
             animateRipple = (x, y, isTouch) => {
                 const
@@ -72,12 +74,11 @@ export default ({
                         return {
                             left: rippleCentered ? 0 : x - left - width / 2,
                             top: rippleCentered ? 0 : y - top - height / 2,
-                            width: width * rippleSpread
+                            diameter: rippleSpread * (rippleScaled ? width : 1)
                         }
                     }
                 if (rippleShouldTrigger(isTouch)) {
                     const
-                        {top, left, width} = getDescriptor(x, y),
                         noRipplesActive = Object.keys(this.state.ripples).length === 0,
                         key = rippleMultiple || noRipplesActive ? getNextKey() : this.currentKey,
                         started = executor(),
@@ -92,7 +93,7 @@ export default ({
                             }))
                         }
                     document.addEventListener(eventType, endRipple)
-                    this.setState({ripples: {...this.state.ripples, [key]: {active: false, restarting: true, top, left, width, endRipple}}},
+                    this.setState({ripples: {...this.state.ripples, [key]: {active: false, restarting: true, endRipple, ...getDescriptor(x, y)}}},
                         () => {
                             started.resolve()
                             if (this.rippleNodes[key]) this.rippleNodes[key].offsetWidth
@@ -106,12 +107,12 @@ export default ({
                     )
                 }
             },
-            renderRipple = (key, className, {active, left, restarting, top, width}) => {
+            renderRipple = (key, className, {active, restarting, top, left, diameter}) => {
                 return (
                     <span key={key} class={style.rippleWrapper || "rippleWrapper"} {...props}>
                 <span
                     class={classes(style.ripple, {[style.rippleActive]: active, [style.rippleRestarting]: restarting}, className)}
-                    style={{transform: `translate3d(${-width / 2 + left}px, ${-width / 2 + top}px, 0) scale(${restarting ? 0 : 1})`, width, height: width}}
+                    style={{transform: `translate3d(${-diameter / 2 + left}px, ${-diameter / 2 + top}px, 0) scale(${restarting ? 0 : 1})`, width: diameter, height: diameter}}
                     ref={node => {if (node) this.rippleNodes[key] = node}}
                 />
             </span>
