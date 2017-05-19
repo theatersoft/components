@@ -9,8 +9,8 @@ export {
     col, cols
 } from './controls'
 
-export {classes} from './classes'
-export {Ripple, mousePosition, touchPosition} from './ripple'
+export {classes, mousePosition, touchPosition} from './utils'
+export {Ripple} from './ripple'
 export {Icon} from './icon'
 export {Button} from './button'
 export {List, ListItem, ListSubheader} from './list'

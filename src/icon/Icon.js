@@ -1,5 +1,5 @@
 import {h, Component} from 'preact'
-import {classes} from '../classes'
+import {classes} from '..'
 import './icon.styl'
 
 export class Icon extends Component {

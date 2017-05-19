@@ -1,5 +1,5 @@
 import {h, Component} from 'preact'
-import {classes} from '../classes'
+import {classes} from '..'
 import './sheet.styl'
 
 export class Sheet extends Component {
