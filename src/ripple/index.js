@@ -1,3 +1,3 @@
-import rippleFactory from './Ripple.js'
-export default options => rippleFactory(options)
+import ripple from './Ripple.js'
+export const Ripple = options => ripple(options)
 export {mousePosition, touchPosition} from './Ripple'

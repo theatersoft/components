@@ -1,8 +1,6 @@
 import {h, Component} from 'preact'
-import {Icon} from '../icon'
-import {classes} from '../classes'
+import {classes, Icon, Ripple} from '..'
 import style from './button.styl'
-import Ripple from '../ripple'
 
 export const Button = Ripple({centered: false})(
     class extends Component {
