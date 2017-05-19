@@ -15,9 +15,9 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
             }
         console.log('TapMenu render', children)
         return (
-            <section class={style.free} {...props} {...{onMouseDown, onTouchStart}}>
+            <div class={style.field} {...props} {...{onMouseDown, onTouchStart}}>
                 {children}
-            </section>
+            </div>
         )
     }
 })
