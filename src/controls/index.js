@@ -2,11 +2,6 @@ import {h, Component} from 'preact'
 import './grid.styl'
 import './controls.styl'
 
-export const Text = ({text, id}) =>
-    <div class="text" id={id}>
-        <span>{text}</span>
-    </div>
-
 export const col = col =>
     <div class="col">
         {col}

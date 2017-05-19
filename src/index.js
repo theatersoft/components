@@ -1,7 +1,6 @@
 import './index.styl'
 
 export {
-    Text,
     Row, Col,
     RowCols, ColRows,
     grid,
