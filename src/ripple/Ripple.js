@@ -14,22 +14,21 @@ export default ({centered = false, class: _class, multiple = true, scaled = true
     }
 
     componentDidUpdate (prevProps, prevState) {
-        const addRippleRemoveEventListener = rippleKey => {
+        if (Object.keys(prevState.ripples).length < Object.keys(this.state.ripples).length) {
             const
-                rippleNode = this.rippleNodes[rippleKey],
+                key = this.currentKey,
+                node = this.rippleNodes[key],
                 onTransitionEnd = e => {
                     if (e.propertyName === 'opacity') {
                         if (this.props.onRippleEnded) this.props.onRippleEnded(e)
-                        rippleNode.removeEventListener('transitionend', onTransitionEnd)
-                        delete this.rippleNodes[rippleKey]
-                        const {[rippleKey]: _, ...ripples} = this.state.ripples
+                        node.removeEventListener('transitionend', onTransitionEnd)
+                        delete this.rippleNodes[key]
+                        const {[key]: _, ...ripples} = this.state.ripples
                         this.setState({ripples})
                     }
                 }
-            if (rippleNode) rippleNode.addEventListener('transitionend', onTransitionEnd)
+            if (node) node.addEventListener('transitionend', onTransitionEnd)
         }
-        if (Object.keys(prevState.ripples).length < Object.keys(this.state.ripples).length)
-            addRippleRemoveEventListener(this.currentKey)
     }
 
     componentWillUnmount () {Object.values(this.state.ripples).forEach(v => v.endRipple())}
@@ -91,20 +90,17 @@ export default ({centered = false, class: _class, multiple = true, scaled = true
                         ref={node => {if (node) this.rippleNodes[key] = node}}
                     />
                 </span>,
-            doRipple = !disabled && ripple,
             onMouseDown = e => {
                 if (this.props.onMouseDown) this.props.onMouseDown(e)
-                if (doRipple) animateRipple(...mousePosition(e), false)
+                animateRipple(...mousePosition(e), false)
             },
             onTouchStart = e => {
                 if (this.props.onTouchStart) this.props.onTouchStart(e)
-                if (doRipple) animateRipple(...touchPosition(e), true)
+                animateRipple(...touchPosition(e), true)
             }
-        return h(ComposedComponent, {
-                ...doRipple && {onMouseDown, onTouchStart},
-                disabled,
-                ...other
-            }, [children, Object.entries(ripples).map(([k, v]) => renderRipple(k, _class, v))]
+        return h(ComposedComponent,
+            {...ripple && !disabled && {onMouseDown, onTouchStart}, disabled, ...other},
+            [children, Object.entries(ripples).map(([k, v]) => renderRipple(k, _class, v))]
         )
     }
 }
