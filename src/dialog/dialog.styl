@@ -1,0 +1,55 @@
+@import base
+@import colors
+@import theme
+
+color = color-white
+
+dialog-border-radius = 2px
+color-title = color-black
+color-white = color-white
+content-padding = 2rem
+navigation-padding = 8px
+translate-y = 40px
+
+.wrapper
+    align-items center
+    display flex
+    height 100vh
+    justify-content center
+    position fixed
+    top 0
+    width 100vw
+    z-index z-index-higher
+
+.dialog
+    background-color color
+    border-radius var(dialog-border-radius)
+    box-shadow var(zdepth-shadow-5)
+    display flex
+    flex-direction column
+    max-height 96vh
+    max-width 96vw
+    opacity 0
+    overflow hidden
+    transform translateY(-1 * translate-y)
+    transition opacity animation-duration animation-curve-default, transform animation-duration animation-curve-default
+    transition-delay animation-delay
+    
+    &.active
+        opacity 1
+        transform translateY(0%)
+
+.title
+    color color-title
+    flex-grow 0
+    font-size 8rem
+    line-height 1
+    margin 0 0 1rem
+
+.body
+    //color: var(--color-text-secondary)
+    flex-grow 2
+    padding content-padding
+    & p
+        font-size 6rem
+        margin 0
