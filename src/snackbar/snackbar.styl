@@ -1,3 +1,43 @@
 @import base
 @import colors
 @import theme
+
+color-cancel = palette-red-500
+color-accept = palette-green-500
+color-warning = palette-lime-a200
+background-color = color-text
+border-radius = 0.2rem
+button-offset = 4.8rem
+color = color-white
+horizontal-offset = 2.4 rem
+vertical-offset = 1.4 rem
+
+.snackbar
+    align-items center
+    background-color background-color
+    border-radius border-radius
+    bottom 0
+    color color
+    display flex
+    left horizontal-offset
+    margin vertical-offset auto 0
+    padding vertical-offset horizontal-offset
+    position fixed
+    right horizontal-offset
+    transition all animation-duration animation-curve-default animation-duration
+    z-index z-index-higher
+
+    &.accept .button
+        color color-accept
+    &.warning .button
+        color color-warning
+    &.cancel .button
+        color color-cancel
+    &:not(.active)
+        transform translateY(100%)
+    &.active
+        transform translateY(0%)
+
+.label
+    flex-grow 1
+    font-size font-size-small

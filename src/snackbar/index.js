@@ -1,1 +1,1 @@
-export {Snackbar} from './Snackbar'
+export {default as Snackbar} from './Snackbar'
