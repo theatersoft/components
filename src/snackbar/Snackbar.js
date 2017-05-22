@@ -1,14 +1,35 @@
 import {h, Component} from 'preact'
-import {classes} from '..'
+import {classes, Activable, Button, Portal} from '../'
 import style from './snackbar.styl'
 
-export class Snackbar extends Component {
-    render ({children, ...props}) {
-        return h('div', {
-                ...props,
-                class: classes(props.class)
-            },
-            children
+export default Activable()(class Snackbar extends Component {
+    componentDidMount () {
+        if (this.props.active && this.props.timeout) this.setTimeout(this.props)
+    }
+
+    componentWillReceiveProps (nextProps) {
+        if (nextProps.active && nextProps.timeout) this.setTimeout(nextProps)
+    }
+
+    componentWillUnmount () {clearTimeout(this.curTimeout)}
+
+    setTimeout = ({onTimeout, timeout}) => {
+        if (this.curTimeout) clearTimeout(this.curTimeout)
+        this.curTimeout = setTimeout(() => {
+            if (onTimeout) onTimeout()
+            this.curTimeout = null
+        }, timeout)
+    }
+
+    render ({action, active, children, label, onClick, ...props}) {
+        return (
+            <Portal className={style.portal}>
+                <div class={classes(props.class, style.snackbar)}>
+                    {label}
+                    {children}
+                    {action && <Button class={style.button} label={action} onClick={onClick}/>}
+                </div>
+            </Portal>
         )
     }
-}
+})
