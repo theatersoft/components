@@ -9,9 +9,13 @@ export {
 } from './controls'
 
 export {classes, mousePosition, touchPosition} from './utils'
+export {default as Activable} from './Activable'
+export {default as Portal} from './Portal'
+export {Overlay} from './overlay'
 export {Ripple} from './ripple'
 export {Icon} from './icon'
 export {Button} from './button'
+export {Dialog} from './dialog'
 export {List, ListItem, ListSubheader} from './list'
 export {Sheet} from './sheet'
 export {Snackbar} from './snackbar'
