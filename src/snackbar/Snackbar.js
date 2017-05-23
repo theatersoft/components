@@ -21,10 +21,10 @@ export default Activable()(class Snackbar extends Component {
         }, timeout)
     }
 
-    render ({action, active, children, label, onClick, ...props}) {
+    render ({class: _class, action, active, children, label, onClick}) {
         return (
             <Portal className={style.portal}>
-                <div class={classes(props.class, style.snackbar)}>
+                <div class={classes(style.snackbar, {[style.active]: active}, _class)}>
                     {label}
                     {children}
                     {action && <Button class={style.button} label={action} onClick={onClick}/>}

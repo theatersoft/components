@@ -2,28 +2,28 @@
 @import colors
 @import theme
 
+color-background = color-white
 color-cancel = palette-red-500
 color-accept = palette-green-500
 color-warning = palette-lime-a200
 background-color = color-text
-border-radius = 0.2rem
+border-radius = 0.6rem
 button-offset = 4.8rem
 color = color-white
-horizontal-offset = 2.4 rem
-vertical-offset = 1.4 rem
+horizontal-offset = 8 rem
+vertical-offset = 4 rem
 
 .snackbar
-    align-items center
-    background-color background-color
-    border-radius border-radius
+    position absolute
     bottom 0
+    left horizontal-offset
+    right horizontal-offset
+    align-items center
+    padding vertical-offset horizontal-offset
+    background-color color-background
+    border-radius border-radius
     color color
     display flex
-    left horizontal-offset
-    margin vertical-offset auto 0
-    padding vertical-offset horizontal-offset
-    position fixed
-    right horizontal-offset
     transition all animation-duration animation-curve-default animation-duration
     z-index z-index-higher
 
