@@ -11,7 +11,6 @@ export default class extends Component {
         console.log('renderPortal')
         const portal = this.props.children && <div class={this.props.class}>{this.props.children}</div>
         if (portal) {
-            this.portalHostNode = document.body
             this.portalNode = render(portal, this.portalHostNode, this.portalNode)
         } else {
             this.unrenderPortal()
@@ -26,5 +25,8 @@ export default class extends Component {
         }
     }
 
-    render () {console.log('Portal.render')}
+    render () {
+        console.log('Portal.render')
+        this.portalHostNode = document.getElementById('ui')
+    }
 }
