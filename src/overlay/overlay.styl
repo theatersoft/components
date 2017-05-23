@@ -1,0 +1,22 @@
+@import base
+@import colors
+@import theme
+
+color = color-black
+opacity = 0.6
+
+.overlay
+    background-color color
+    bottom 0
+    height 100vh
+    left 0
+    opacity 0
+    pointer-events none
+    position fixed
+    top 0
+    transition opacity animation-duration animation-curve-default
+    width 100vw
+
+    &.active
+        opacity opacity
+        pointer-events all
