@@ -6,9 +6,10 @@ color = color-white
 
 dialog-border-radius = 0.6rem
 color-title = color-black
+color-body = color-black
 color-white = color-white
 content-padding = 6rem
-navigation-padding = 4rem
+navigation-padding = 3rem
 translate-y = 16rem
 
 .wrapper
@@ -27,7 +28,7 @@ translate-y = 16rem
     width 80%
     background-color color
     border-radius dialog-border-radius
-    box-shadow zdepth-shadow
+    shadow-zz-inverse()
     display flex
     flex-direction column
     opacity 0
@@ -48,9 +49,20 @@ translate-y = 16rem
     margin 0 0 1rem
 
 .body
-    //color: var(--color-text-secondary)
+    color color-body
     flex-grow 2
     padding content-padding
     & p
         font-size 6rem
         margin 0
+
+.navigation
+    flex-grow 0
+    padding navigation-padding
+    text-align right
+
+.button
+    margin-left navigation-padding
+    min-width 0
+    padding-left navigation-padding
+    padding-right navigation-padding

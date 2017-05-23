@@ -2,6 +2,11 @@ import {h, Component} from 'preact'
 import {Button, Dialog} from '@theatersoft/components'
 
 export default class extends Component {
+    actions = [
+        {label: 'cancel', primary: true},
+        {label: 'next', primary: true}
+    ]
+
     render (_, {active}) {
         return (
             <section>
