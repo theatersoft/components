@@ -1,19 +1,18 @@
 @import '@theatersoft/components'
 
-section
-    display flex
-    flex-flow row wrap
-    align-items center
-    margin 2rem 4rem
-    background-color theme-dark-background-transparent
-    box-shadow 0 1rem 2rem rgba(0, 0, 0, 0.5)
-    :global &.light
-        background-color theme-light-background-transparent
-
-:global .scroll
+.app
     overflow-x hidden
     overflow-y scroll !important
     height inherit
+    & > section
+        display flex
+        flex-flow row wrap
+        align-items center
+        margin 2rem 4rem
+        background-color theme-dark-background-transparent
+        box-shadow 0 1rem 2rem rgba(0, 0, 0, 0.5)
+        :global &.light
+            background-color theme-light-background-transparent
 
 .halfscreen
     height 50%
