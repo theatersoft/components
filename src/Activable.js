@@ -1,6 +1,6 @@
 import {h, Component} from 'preact'
 
-export default ({delay = 5000} = {}) => ActivableComponent => class extends Component {
+export default ({delay = 500} = {}) => ActivableComponent => class extends Component {
     static defaultProps = {delay}
 
     state = {active: this.props.active, rendered: this.props.active}
@@ -24,7 +24,6 @@ export default ({delay = 5000} = {}) => ActivableComponent => class extends Comp
                     }, this.props.delay)
                 })
             }
-        //debugger
         if (active ^ this.props.active) active ? activate() : deactivate()
     }
 
