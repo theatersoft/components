@@ -3,6 +3,8 @@ import {h, Component, render} from 'preact'
 const Null = () => null
 
 export default class extends Component {
+    componentDidMount () {this.renderPortal()}
+
     componentDidUpdate () {this.renderPortal()}
 
     componentWillUnmount () {this.unrenderPortal()}
