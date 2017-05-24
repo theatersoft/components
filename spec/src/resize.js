@@ -26,3 +26,10 @@ export function setAr (value) {
         resize()
     }
 }
+
+// request fullscreen if first mousedown is outside body
+const fullscreen = e => {
+    if (e.target === document.documentElement) document.body.webkitRequestFullscreen()
+    document.documentElement.removeEventListener('mousedown', fullscreen)
+}
+document.documentElement.addEventListener('mousedown', fullscreen)
