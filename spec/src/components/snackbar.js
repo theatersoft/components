@@ -12,12 +12,12 @@ export default class extends Component {
                 <Button label="Show Snackbar" raised onClick={this.activate}/>
                 <Snackbar
                     label="Snackbar label"
+                    type="warning"
                     action="Hide"
                     active={active}
                     timeout={4000}
                     onClick={this.deactivate}
                     onTimeout={this.deactivate}
-                    type="warning"
                 />
             </section>
         )

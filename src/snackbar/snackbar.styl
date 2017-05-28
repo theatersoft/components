@@ -3,9 +3,9 @@
 @import theme
 
 color-background = color-black
-color-cancel = palette-red-500
-color-accept = palette-green-500
-color-warning = palette-lime-a200
+color-error = rgb(244, 67, 54) // palette-red-500
+color-warning = color-accent
+color-normal = rgb(76, 175, 80) // palette-green-500
 border-radius = 0.6rem
 button-offset = 4.8rem
 color = color-white
@@ -26,12 +26,12 @@ vertical-offset = 4 rem
     transition all animation-duration animation-curve-default animation-duration
     z-index z-index-higher
 
-    &.accept .button
-        color color-accept
+    &.normal .button
+        color color-normal
     &.warning .button
         color color-warning
-    &.cancel .button
-        color color-cancel
+    &.error .button
+        color color-error
     &:not(.active)
         transform translateY(100%)
     &.active
@@ -39,4 +39,3 @@ vertical-offset = 4 rem
 
 .label
     flex-grow 1
-    font-size font-size-small
