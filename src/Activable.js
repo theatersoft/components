@@ -24,7 +24,7 @@ export default ({delay = 500} = {}) => ActivableComponent => class extends Compo
                     }, this.props.delay)
                 })
             }
-        if (active ^ this.props.active) active ? activate() : deactivate()
+        if (active !== this.props.active) active ? activate() : deactivate()
     }
 
     componentWillUnmount () {
