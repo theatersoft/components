@@ -28,7 +28,7 @@ export default Activable()(class Snackbar extends Component {
                     <span class={style.label}>
                         {label}
                         {children}
-                        </span>
+                    </span>
                     {action && <Button class={style.button} label={action} onClick={onClick}/>}
                 </div>
             </Portal>
