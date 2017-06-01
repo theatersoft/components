@@ -4,8 +4,8 @@
 
 unit = 3.0rem
 height = unit * 3.6
-floating-height = unit * 5.3
-floating-mini-height = unit * 3.6
+round-diameter = unit * 5.3
+round-mini-diameter = unit * 3.6
 squared-icon-margin = unit * .6
 squared-min-width = unit * 9
 squared-padding = 0 unit * 0.8
@@ -31,6 +31,11 @@ squared()
     padding squared-padding
     border-radius 0.2 * unit
 
+round()
+    border-radius 50%
+    width round-diameter
+    height round-diameter
+
 solid()
     &:active
         shadow-zz()
@@ -47,6 +52,11 @@ solid()
     squared()
     background transparent
 
+.round
+    button()
+    round()
+    background transparent
+
 .raised
     button()
     squared()
@@ -58,15 +68,14 @@ solid()
 .floating
     button()
     solid()
-    border-radius 50%
+    round()
     box-shadow 0 1rem 1.5rem 0 rgba(color-black, .12), 0 1rem 1rem 0 rgba(color-black, .24)
-    width floating-height
-    height floating-height
+
     &.inverse
         box-shadow 0 1rem 1rem 0 rgba(color-white, .4), 0 1rem 1rem 0 rgba(color-black, .4)
     &.mini
-        width floating-mini-height
-        height floating-mini-height
+        width round-mini-diameter
+        height round-mini-diameter
     & :global .rippleWrapper
         border-radius 50%
 
@@ -87,37 +96,37 @@ disabled-background-inverse = rgba(color-white, 0.08)
     &.raised, &.floating
         color neutral-color-contrast
         background neutral-color
-    &.flat
+    &.flat, &.round
         color neutral-color-contrast
         background transparent
-    &.flat:hover
+    &.flat:hover, &.round:hover
         background neutral-color-hover
     &.inverse
         &.raised, &.floating
             color neutral-color
             background neutral-color-contrast
-        &.flat
+        &.flat, &.round
             color neutral-color
-        &.flat:hover
+        &.flat:hover, &.round:hover
             background neutral-color-hover
 
 .primary
     &.raised, &.floating
         color color-primary-contrast
         background color-primary
-    &.flat
+    &.flat, &.round
         color color-primary
-    &.flat:hover
+    &.flat:hover, &.round:hover
         background primary-color-hover
     &.inverse
-        &.flat
+        &.flat, &.round
             color color-primary-light
 
 .accent
     &.raised, &.floating
         color color-accent-contrast
         background color-accent
-    &.flat
+    &.flat, &.round
         color color-accent
-    &.flat:hover
+    &.flat:hover, &.round:hover
         background accent-color-hover
