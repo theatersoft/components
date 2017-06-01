@@ -15,7 +15,7 @@ export const Button = Ripple({centered: false})(
                         mini && style.mini
                     )
                 },
-                icon && <Icon icon={icon} class={style.icon} small disabled={props.disabled}/>,
+                icon && <Icon icon={icon} class={style.icon} small={mini || !round && !floating} disabled={props.disabled}/>,
                 label,
                 children
             )
