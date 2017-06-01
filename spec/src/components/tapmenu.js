@@ -3,10 +3,10 @@ import {Button, TapMenu, mousePosition, touchPosition} from '@theatersoft/compon
 import style from '../App.styl'
 
 const actions = [
-    {tooltip: 'one', icon: 'cross'},
-    {tooltip: 'two', icon: 'cross'},
-    {tooltip: 'three', icon: 'cross'},
-    {tooltip: 'four', icon: 'cross'}
+    {tooltip: 'one', icon: 'logo'},
+    {tooltip: 'two', icon: 'list'},
+    {tooltip: 'three', icon: 'thermometer'},
+    {tooltip: 'four', icon: 'spinner'}
 ]
 
 export default () => {
