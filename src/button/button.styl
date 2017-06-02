@@ -95,6 +95,10 @@ disabled-background-color = rgba(color-black, 0.12)
 disabled-text-color-inverse = rgba(color-white, 0.54)
 disabled-background-inverse = rgba(color-white, 0.08)
 
+hover(color)
+    transition background .8s animation-curve-default
+    background color
+
 .neutral
     &.raised, &.floating
         color neutral-color-contrast
@@ -103,7 +107,7 @@ disabled-background-inverse = rgba(color-white, 0.08)
         color neutral-color-contrast
         background transparent
     &.flat:hover, &.round:hover
-        background neutral-color-hover
+        hover(neutral-color-hover)
     &.inverse
         &.raised, &.floating
             color neutral-color
@@ -111,7 +115,7 @@ disabled-background-inverse = rgba(color-white, 0.08)
         &.flat, &.round
             color neutral-color
         &.flat:hover, &.round:hover
-            background neutral-color-hover
+            hover(neutral-color-hover)
 
 .primary
     &.raised, &.floating
@@ -120,7 +124,7 @@ disabled-background-inverse = rgba(color-white, 0.08)
     &.flat, &.round
         color color-primary
     &.flat:hover, &.round:hover
-        background primary-color-hover
+        hover(primary-color-hover)
     &.inverse
         &.flat, &.round
             color color-primary-light
@@ -132,4 +136,4 @@ disabled-background-inverse = rgba(color-white, 0.08)
     &.flat, &.round
         color color-accent
     &.flat:hover, &.round:hover
-        background accent-color-hover
+        hover(accent-color-hover)
