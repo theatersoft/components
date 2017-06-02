@@ -5,7 +5,8 @@
 unit = 3.0rem
 height = unit * 3.6
 round-diameter = unit * 5.3
-round-mini-diameter = unit * 3.6
+round-small-diameter = unit * 3.6
+round-large-diameter = unit * 7.6
 squared-icon-margin = unit * .6
 squared-min-width = unit * 9
 squared-padding = 0 unit * 0.8
@@ -35,6 +36,12 @@ round()
     border-radius 50%
     width round-diameter
     height round-diameter
+    &.small
+        width round-small-diameter
+        height round-small-diameter
+    &.large
+        width round-large-diameter
+        height round-large-diameter
     & :global .rippleWrapper
         border-radius 50%
 
@@ -74,9 +81,6 @@ solid()
     box-shadow 0 1rem 1.5rem 0 rgba(color-black, .12), 0 1rem 1rem 0 rgba(color-black, .24)
     &.inverse
         box-shadow 0 1rem 1rem 0 rgba(color-white, .4), 0 1rem 1rem 0 rgba(color-black, .4)
-    &.mini
-        width round-mini-diameter
-        height round-mini-diameter
 
 neutral-color = color-white
 neutral-color-contrast = palette-grey-900

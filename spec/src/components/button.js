@@ -11,7 +11,7 @@ export default ({light}) => {
         <Button icon="cross" label="Primary" raised primary {...{inverse}}/>
         <Button label="Accent" raised accent {...{inverse}}/>
         <Button icon="cross" floating {...{inverse}}/>
-        <Button label="8" floating primary mini {...{inverse}}/>
-        <Button icon="cross" floating accent mini {...{inverse}}/>
+        <Button label="8" floating primary small {...{inverse}}/>
+        <Button icon="cross" floating accent large {...{inverse}}/>
     </section>
 }
