@@ -2,12 +2,7 @@ import {h, Component} from 'preact'
 import {Button, TapMenu, mousePosition, touchPosition} from '@theatersoft/components'
 import style from '../App.styl'
 
-const actions = [
-    {tooltip: 'one', icon: 'logo'},
-    {tooltip: 'two', icon: 'list'},
-    {tooltip: 'three', icon: 'thermometer'},
-    {tooltip: 'four', icon: 'spinner'}
-]
+const actions = ['logo', 'list', 'thermometer', 'spinner'].map(a => ({icon: a, tooltip: a, onClick: e => console.log(a, e)}))
 
 export default () => {
     return (
