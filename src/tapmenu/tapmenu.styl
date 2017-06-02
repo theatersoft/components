@@ -22,7 +22,9 @@ group-end-size = 56rem
     margin-left (group-start-size / -2)
     margin-top (group-start-size / -2)
     opacity 0
-    transition none
+    transition-property opacity, width, height, margin-left, margin-top
+    transition-duration animation-duration
+    transition-delay 0s, 1s, 1s, 1s, 1s
     pointer-events none
     &.active
         transition all animation-duration animation-curve-default
