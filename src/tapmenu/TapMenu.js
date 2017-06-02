@@ -54,7 +54,7 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
                     {actions.map((action, i) =>
                         <Button
                             class={classes(style.button, style[`button-${i}`], action.class)}
-                            round inverse key={i}
+                            large round inverse key={i}
                             {...action}
                             onClick={this.onButtonClick}
                         />)}
