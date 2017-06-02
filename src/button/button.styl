@@ -35,6 +35,8 @@ round()
     border-radius 50%
     width round-diameter
     height round-diameter
+    & :global .rippleWrapper
+        border-radius 50%
 
 solid()
     &:active
@@ -70,14 +72,11 @@ solid()
     solid()
     round()
     box-shadow 0 1rem 1.5rem 0 rgba(color-black, .12), 0 1rem 1rem 0 rgba(color-black, .24)
-
     &.inverse
         box-shadow 0 1rem 1rem 0 rgba(color-white, .4), 0 1rem 1rem 0 rgba(color-black, .4)
     &.mini
         width round-mini-diameter
         height round-mini-diameter
-    & :global .rippleWrapper
-        border-radius 50%
 
 neutral-color = color-white
 neutral-color-contrast = palette-grey-900
