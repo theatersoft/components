@@ -22,7 +22,7 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
         if (!this.state.active) {
             this.activate(...mousePosition(e))
             this.props.onMouseDown(e)
-        } else this.deactivate()
+        }
     }
 
     onTouchStart = e => {
@@ -30,14 +30,23 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
         //    props.onTouchStart(e)
     }
 
-    onClick = e => {
+    onFieldClick = e => {
+        if (this.state.active) this.deactivate()
+    }
+
+    onButtonClick = e => {
+        e.stopPropagation()
         log(e)
-        deactivate()
+        //action
     }
 
     render ({actions, children, ...props}, {active, left, top}) {
         return (
-            <div class={style.field} {...props} onMouseDown={this.onMouseDown} onTouchStart={this.onTouchStart}>
+            <div class={style.field} {...props}
+                 onMouseDown={this.onMouseDown}
+                 onTouchStart={this.onTouchStart}
+                 onClick={this.onFieldClick}
+            >
                 <div
                     class={classes(style.group, {[style.active]: active})}
                     style={{left, top}}
@@ -47,7 +56,7 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
                             class={classes(style.button, style[`button-${i}`], action.class)}
                             round inverse key={i}
                             {...action}
-                            onClick={this.onClick}
+                            onClick={this.onButtonClick}
                         />)}
                 </div>
                 {children}
