@@ -23,7 +23,7 @@ export default Activable()(class Snackbar extends Component {
 
     render ({class: _class, type, action, active, children, label, onClick}) {
         return (
-            <Portal className={style.portal}>
+            <Portal>
                 <div class={classes(style.snackbar, {[style.active]: active}, {[style[type]]: !!type}, _class)}>
                     <span class={style.label}>
                         {label}
