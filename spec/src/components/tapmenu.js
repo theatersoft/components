@@ -6,7 +6,7 @@ const actions = ['logo', 'list', 'thermometer', 'spinner'].map(a => ({icon: a, t
 
 export default () => {
     return (
-        <section class={style.halfscreen}>
+        <section class={style.tapmenu}>
             <TapMenu actions={actions}/>
         </section>
     )
