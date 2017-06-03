@@ -10,7 +10,6 @@ export default class extends Component {
     componentWillUnmount () {this.unrenderPortal()}
 
     renderPortal () {
-        console.log('renderPortal')
         const portal = this.props.children && <div class={this.props.class}>{this.props.children}</div>
         if (portal) {
             this.portalNode = render(portal, this.portalHostNode, this.portalNode)
@@ -20,7 +19,6 @@ export default class extends Component {
     }
 
     unrenderPortal () {
-        console.log('unrenderPortal')
         if (this.portalNode) {
             render(<Null/>, this.portalHostNode, this.portalNode)
             this.portalNode = null
@@ -28,7 +26,7 @@ export default class extends Component {
     }
 
     render () {
-        console.log('Portal.render')
         this.portalHostNode = document.getElementById('ui')
+        return null
     }
 }
