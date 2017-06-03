@@ -30,6 +30,6 @@ export default ({delay = 500} = {}) => ActivableComponent => class extends Compo
     }
 
     render ({delay, ...others}, {active, rendered}) {
-        return rendered && <ActivableComponent {...others} active={active}/>
+        return rendered ? <ActivableComponent {...others} active={active}/> : null
     }
 }

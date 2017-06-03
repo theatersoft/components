@@ -10,10 +10,10 @@ import style from './App.styl'
 
 export default () => (
     h('div', {class: style.app}
-        ,<Dialog/>
+        //,<Dialog/>
         //,<Snackbar/>
         //,<List/>
-        //,<TapMenu/>
+        ,<TapMenu/>
         //,<Switch/>
         //,<Icon/>
         //,<Button/>
