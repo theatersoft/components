@@ -13,11 +13,15 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
 
     activate = (left, top) => {
         this.setState({active: false, left, top}, () => {
-            this.activateTimeout = setTimeout(() => this.setState({active: true}), 100)
+            this.activateTimeout = setTimeout(() => {
+                this.setState({active: true})
+                this.deactivateTimeout = setTimeout(this.deactivate, 3000)
+            }, 10)
         })
     }
 
     deactivate = () => {
+        if (this.deactivateTimeout) clearTimeout(this.deactivateTimeout)
         this.setState({active: false})
     }
 
