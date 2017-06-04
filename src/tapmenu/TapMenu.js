@@ -27,7 +27,7 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
 
     onMouseDown = e => {
         if (!this.state.active) {
-            this.activate(...mousePosition(e))
+            if (!e.defaultPrevented) this.activate(...mousePosition(e))
             this.props.onMouseDown(e)
         }
     }
