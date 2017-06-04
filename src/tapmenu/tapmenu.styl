@@ -13,8 +13,8 @@ group-end-size = 56rem
 .group
     position fixed
     display grid
-    grid-auto-rows 33%
-    grid-auto-columns 33%
+    grid-auto-rows 33.33%
+    grid-auto-columns 33.33%
     width group-start-size
     height group-start-size
     margin-left (group-start-size / -2)
@@ -32,6 +32,13 @@ group-end-size = 56rem
         margin-left (group-end-size / -2)
         margin-top (group-end-size / -2)
         pointer-events all
+
+.ring
+    position absolute
+    width 100%
+    height 100%
+    border 22.8rem solid theme-dark-background-transparent
+    border-radius 50%
 
 .button-x
     grid-row 2

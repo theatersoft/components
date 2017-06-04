@@ -44,6 +44,7 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
         return (
             <div {...props} class={classes(style.field, props.class)} onMouseDown={this.onMouseDown} onTouchStart={this.onTouchStart} onClick={this.onFieldClick}>
                 <div class={classes(style.group, active && style.active)} style={{left, top}}>
+                    <div class={style.ring}/>
                     <Button class={classes(style.button, style[`button-x`])} small round inverse onClick={this.onFieldClick}/>
                     {actions.map((action, i) =>
                         <Button class={classes(style.button, style[`button-${i}`], action.class)} large round inverse {...action}/>)}
