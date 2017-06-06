@@ -1,7 +1,7 @@
 import {h, Component} from 'preact'
 import {classes, Button, Ripple, mousePosition, touchPosition} from '../'
 import style from './tapmenu.styl'
-import {log} from '@theatersoft/bus'
+//import {log} from '@theatersoft/bus'
 
 export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(class extends Component {
     state = {active: false}
