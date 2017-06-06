@@ -2,7 +2,7 @@ import {h, Component} from 'preact'
 import {Button, Sheet} from '@theatersoft/components'
 
 export default class extends Component {
-    state = {active: true}
+    state = {active: false}
 
     render (_, {active, type}) {
         return (

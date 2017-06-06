@@ -2,7 +2,9 @@
 @import colors
 @import theme
 
-height = 90rem
+exposed = 14rem
+height = (100 - exposed)
+width = (w(100) - exposed)
 
 .wrapper
     position absolute
@@ -17,14 +19,28 @@ height = 90rem
 
 .sheet
     position absolute
-    height height
-    width 100%
-    top (100 - height)
     background-color theme-background-transparent
     overflow hidden
-    transform translateY(height)
     transition transform animation-duration animation-curve-default
-    transition-delay animation-delay
-
-    &.active
-        transform translateY(0%)
+    &.top, &.bottom
+        height height
+        width 100%
+    &.top
+        transform translateY(0 - height)
+        top 0
+    &.bottom
+        transform translateY(height)
+        top (100 - height)
+    &.active.top, &.active.bottom
+        transform translateY(0)
+    &.left, &.right
+        height 100%
+        width width
+    &.left
+        transform translateX(0 - width)
+        top 0
+    &.right
+        transform translateX(width)
+        left (w(100) - width)
+    &.active.left, &.active.right
+        transform translateX(0)

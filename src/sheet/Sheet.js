@@ -4,9 +4,9 @@ import style from './sheet.styl'
 import {log} from '@theatersoft/bus'
 
 class Sheet extends Component {
-    defaultProps = {
+    static defaultProps = {
         active: false,
-        type: 'left'
+        type: 'bottom'
     }
 
     onClick = e => {
