@@ -10,17 +10,15 @@ class Sheet extends Component {
     }
 
     onClick = e => {
-        log('onClick')
-        e.preventDefault()
-        e.stopPropagation()
+        log('Sheet.onClick')
         if (this.props.onClick) this.props.onClick(e)
     }
 
     render ({class: _class, active, onClick, type, children}) {
         return (
             <Portal class={style.wrapper}>
-                <div class={style.overlay} active={active} onClick={this.onClick}/>
-                    <section class={classes(style.sheet, style[type], {[style.active]: active}, _class)}>
+                <div class={style.overlay} onClick={this.onClick}/>
+                    <section class={classes(style.sheet, style[type], active && style.active, _class)}>
                     {children}
                 </section>
             </Portal>
