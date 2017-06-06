@@ -2,7 +2,9 @@ import {h, Component} from 'preact'
 import {Button, Sheet} from '@theatersoft/components'
 
 export default class extends Component {
-    render (_, {active}) {
+    state = {active: true}
+
+    render (_, {active, type}) {
         return (
             <section>
                 <p>sheet</p>
@@ -12,7 +14,7 @@ export default class extends Component {
                 <Button label="Top" raised primary onClick={() => this.setState({active: true, type: 'top'})}/>
                 <Button label="Bottom" raised primary onClick={() => this.setState({active: true, type: 'bottom'})}/>
                 </nav>
-                <Sheet active={active} type={type} onOverlayClick={() => this.setState({active: false})}>
+                <Sheet active={active} type={type} onClick={() => this.setState({active: false})}>
                     <p>content</p>
                 </Sheet>
             </section>

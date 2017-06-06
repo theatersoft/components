@@ -1,1 +1,1 @@
-export {Sheet} from './Sheet'
+export {default as Sheet} from './Sheet'

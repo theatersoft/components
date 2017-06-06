@@ -1,13 +1,31 @@
 import {h, Component} from 'preact'
-import {classes} from '..'
-import './sheet.styl'
+import {classes, Activable, Button, Overlay, Portal} from '../'
+import style from './sheet.styl'
+import {log} from '@theatersoft/bus'
 
-export class Sheet extends Component {
-    render ({children, ...props}) {
+class Sheet extends Component {
+    defaultProps = {
+        active: false,
+        type: 'left'
+    }
+
+    onClick = e => {
+        log('onClick')
+        e.preventDefault()
+        e.stopPropagation()
+        if (this.props.onClick) this.props.onClick(e)
+    }
+
+    render ({class: _class, active, onClick, type, children}) {
         return (
-            <div class={classes('sheet', props.class)}>
-                {children}
-            </div>
+            <Portal class={style.wrapper}>
+                <div class={style.overlay} active={active} onClick={this.onClick}/>
+                    <section class={classes(style.sheet, style[type], {[style.active]: active}, _class)}>
+                    {children}
+                </section>
+            </Portal>
         )
     }
 }
+
+export default Activable()(Sheet)

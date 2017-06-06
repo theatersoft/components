@@ -2,3 +2,29 @@
 @import colors
 @import theme
 
+height = 90rem
+
+.wrapper
+    position absolute
+    top 0
+    width 100%
+    height 100%
+
+.overlay
+    position fixed
+    width 100%
+    height 100%
+
+.sheet
+    position absolute
+    height height
+    width 100%
+    top (100 - height)
+    background-color theme-background-transparent
+    overflow hidden
+    transform translateY(height)
+    transition transform animation-duration animation-curve-default
+    transition-delay animation-delay
+
+    &.active
+        transform translateY(0%)
