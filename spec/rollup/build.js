@@ -4,7 +4,6 @@ require('shelljs/make')
 const
     fs = require('fs'),
     {rollup} = require('rollup'),
-    alias = require('rollup-plugin-alias'),
     babel = require('rollup-plugin-babel'),
     commonjs = require('rollup-plugin-commonjs'),
     nodeResolve = require('rollup-plugin-node-resolve'),
