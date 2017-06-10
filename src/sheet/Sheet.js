@@ -1,7 +1,6 @@
 import {h, Component} from 'preact'
 import {classes, Activable, Button, Overlay, Portal} from '../'
 import style from './sheet.styl'
-import {log} from '@theatersoft/bus'
 
 class Sheet extends Component {
     static defaultProps = {
@@ -10,7 +9,6 @@ class Sheet extends Component {
     }
 
     onClick = e => {
-        log('Sheet.onClick')
         if (this.props.onClick) this.props.onClick(e)
     }
 
