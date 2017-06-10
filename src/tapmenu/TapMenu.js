@@ -1,7 +1,7 @@
 import {h, Component} from 'preact'
 import {classes, Button, Ripple, mousePosition, touchPosition} from '../'
 import style from './tapmenu.styl'
-import {log} from '@theatersoft/bus'
+//import {log} from '@theatersoft/bus'
 
 export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(class extends Component {
     state = {active: false}
@@ -13,11 +13,16 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
             if (this.props.onActive) this.props.onActive(this.state.active)
     }
 
+    restartTimeout = () => {
+        if (this.deactivateTimeout) clearTimeout(this.deactivateTimeout)
+        this.deactivateTimeout = setTimeout(this.deactivate, 3000)
+    }
+
     activate = (left, top) => {
         this.setState({active: false, left, top}, () => {
             this.activateTimeout = setTimeout(() => {
                 this.setState({active: true})
-                this.deactivateTimeout = setTimeout(this.deactivate, 3000)
+                this.restartTimeout()
             }, 10)
         })
     }
@@ -43,7 +48,8 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
     }
 
     onKeydown = e => {
-        log('TapMenu.onKeydown', e)
+        //log('TapMenu.onKeydown', e)
+        this.restartTimeout()
         switch (e.key) {
         case 'Escape':
             if (this.state.active) {
@@ -53,7 +59,6 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
         case 'Enter':
         case 'NumpadEnter':
             if (this.state.active) {
-                // TODO focus
                 this.deactivate()
             } else {
                 const {left, top, height, width} = this.base.getBoundingClientRect()
@@ -62,9 +67,7 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
             break
         default:
             if (this.state.active) {
-                const
-                    i = {'ArrowUp': 0, 'ArrowRight': 1, 'ArrowDown': 2, 'ArrowLeft': 3}[e.key],
-                    button = this.buttons[i]
+                const button = this.buttons[{'ArrowUp': 0, 'ArrowRight': 1, 'ArrowDown': 2, 'ArrowLeft': 3}[e.key]]
                 if (button) button.focus()
             }
         }
