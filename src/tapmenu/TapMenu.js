@@ -6,6 +6,8 @@ import {log} from '@theatersoft/bus'
 export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(class extends Component {
     state = {active: false}
 
+    buttons = []
+
     componentDidUpdate (_prevProps, prevState) {
         if (this.state.active !== prevState.active)
             if (this.props.onActive) this.props.onActive(this.state.active)
@@ -52,6 +54,14 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
                 const {left, top, height, width} = this.base.getBoundingClientRect()
                 this.activate(left + width / 2, top + height / 2)
             }
+            break
+        default:
+            if (this.state.active) {
+                const
+                    i = {'ArrowUp': 0, 'ArrowRight': 1, 'ArrowDown': 2, 'ArrowLeft': 3}[e.key],
+                    button = this.buttons[i]
+                if (button) button.focus()
+            }
         }
     }
 
@@ -77,6 +87,7 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
                     {actions.map((action, i) =>
                         <Button large round inverse
                                 class={classes(style.button, style[`button-${i}`], action.class)}
+                                ref={ref => this.buttons[i] = ref.base}
                             {...action}
                         />)}
                 </div>
