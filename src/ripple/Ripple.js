@@ -57,9 +57,9 @@ export default ({centered = false, class: _class, multiple = true, scaled = true
                         inactive = Object.keys(this.state.ripples).length === 0,
                         key = multiple || inactive ? getNextKey() : this.currentKey,
                         started = executor(),
-                        eventType = isTouch ? 'touchend' : 'mouseup',
+                        eventTypes = isTouch ? ['touchend', 'touchmove'] : ['mouseup'],
                         endRipple = () => {
-                            document.removeEventListener(eventType, endRipple)
+                            for (const type of eventTypes) document.removeEventListener(type, endRipple)
                             started.promise.then(() => this.setState({
                                 ripples: {
                                     ...this.state.ripples,
@@ -67,7 +67,7 @@ export default ({centered = false, class: _class, multiple = true, scaled = true
                                 }
                             }))
                         }
-                    document.addEventListener(eventType, endRipple)
+                    for (const type of eventTypes) document.addEventListener(type, endRipple)
                     this.setState({ripples: {...this.state.ripples, [key]: {active: false, restarting: true, endRipple, ...getDescriptor(x, y)}}},
                         () => {
                             started.resolve()
