@@ -45,6 +45,11 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
     onKeydown = e => {
         log('TapMenu.onKeydown', e)
         switch (e.key) {
+        case 'Escape':
+            if (this.state.active) {
+                this.deactivate()
+            }
+            break
         case 'Enter':
         case 'NumpadEnter':
             if (this.state.active) {
