@@ -3,6 +3,8 @@ import {classes, Button, Ripple, mousePosition, touchPosition} from '../'
 import style from './tapmenu.styl'
 //import {log} from '@theatersoft/bus'
 
+const keyIndex = {'ArrowUp': 0, 'ArrowRight': 1, 'ArrowDown': 2, 'ArrowLeft': 3}
+
 export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(class extends Component {
     state = {active: false}
 
@@ -67,7 +69,7 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
             break
         default:
             if (this.state.active) {
-                const button = this.buttons[{'ArrowUp': 0, 'ArrowRight': 1, 'ArrowDown': 2, 'ArrowLeft': 3}[e.key]]
+                const button = this.buttons[keyIndex[e.key]]
                 if (button) button.focus()
             }
         }
