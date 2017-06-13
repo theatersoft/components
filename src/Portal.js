@@ -2,6 +2,16 @@ import {h, Component, render} from 'preact'
 
 const Null = () => null
 
+class PortalProvider extends Component {
+    getChildContext () {
+        return this.props.context
+    }
+
+    render () {
+        return <div class={this.props.class}>{this.props.children}</div>
+    }
+}
+
 export default class extends Component {
     componentDidMount () {this.renderPortal()}
 
@@ -11,7 +21,7 @@ export default class extends Component {
 
     renderPortal () {
         if (this.props.children)
-            this.portalNode = render(<div class={this.props.class}>{this.props.children}</div>, this.portalHostNode, this.portalNode)
+            this.portalNode = render(h(PortalProvider, {context: this.context, ...this.props}, this.props.children), this.portalHostNode, this.portalNode)
         else
             this.unrenderPortal()
     }
