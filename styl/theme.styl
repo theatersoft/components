@@ -20,10 +20,6 @@ color-accent-transparent = rgba(palette-amber-500, 0.8)
 theme-background = theme-dark-background
 theme-background-transparent = theme-dark-background-transparent
 
-text()
-    font-size 8rem
-    font-family Alegreya Sans SC
-
 animation-duration = .35s
 animation-delay = animation-duration / 5
 animation-curve-fast-out-slow-in = cubic-bezier(0.4, 0, 0.2, 1)
@@ -63,7 +59,14 @@ z-index-high()
 z-index-higher()
     z-index 200
 
-font-size-tiny = 4rem
+font-size-x-small = 4rem
 font-size-small = 6rem
-font-size-normal = 8rem
-font-size-big = 10rem
+font-size-normal = 8rem // medium
+font-size-large = 10rem
+font-size-x-large = 16rem
+font-size-xx-large = 24rem
+font-size-xxx-large = 48rem
+
+text()
+    font-size font-size-normal
+    font-family Alegreya Sans SC
