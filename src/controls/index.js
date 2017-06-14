@@ -1,6 +1,5 @@
 import {h, Component} from 'preact'
 import './grid.styl'
-import './controls.styl'
 
 export const col = col =>
     <div class="col">
