@@ -1,13 +1,5 @@
 import './index.styl'
 
-export {
-    Row, Col,
-    RowCols, ColRows,
-    grid,
-    row, rows,
-    col, cols
-} from './controls'
-
 export {classes, mousePosition, touchPosition} from './utils'
 export {default as Activable} from './Activable'
 export {default as Portal} from './Portal'
