@@ -15,8 +15,13 @@
     "link": "npm link @theatersoft/bus",
     "publish": "node build.js publish"
   },
-  "distScripts": {
-    "link": "npm link"
+  "dist": {
+    "devDependencies": {},
+    "main": "main.js",
+    "module": "components.es.js",
+    "scripts": {
+      "link": "npm link"
+    }
   },
   "devDependencies": {
     "@theatersoft/bus": "~1",

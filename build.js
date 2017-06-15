@@ -7,6 +7,7 @@ const
     name = pkg.name.startsWith('@theatersoft') && pkg.name.slice(13),
     DIST = process.env.DIST === 'true',
     fs = require('fs'),
+    writeJson = (file, json) => fs.writeFileSync(file, JSON.stringify(json, null, '  '), 'utf-8'),
     copyright = `/*\n${fs.readFileSync('COPYRIGHT', 'utf8')}\n */`,
     {rollup} = require('rollup'),
     commonjs = require('rollup-plugin-commonjs'),
@@ -120,15 +121,7 @@ const targets = {
 
     package () {
         console.log('target package')
-        const p = Object.assign({}, pkg, {
-            main: `main.js`,
-            module: `${name}.es.js`,
-            private: !DIST,
-            devDependencies: undefined,
-            distScripts: undefined,
-            scripts: pkg.distScripts
-        })
-        fs.writeFileSync('dist/package.json', JSON.stringify(p, null, '  '), 'utf-8')
+        writeJson('dist/package.json', Object.assign({}, pkg, {private: !DIST, dist: undefined}, pkg.dist))
         exec('cp LICENSE COPYRIGHT README.md .npmignore dist')
         exec('cp -r index.styl styl dist')
         exec('touch dist/main.js')
