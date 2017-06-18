@@ -12,6 +12,6 @@ export class List extends Component {
     }
 }
 
-export const ListSubheader = ({label, class: _class}) => (
+export const Subheader = ({label, class: _class}) => (
     <h5 class={classes(style.subheader, _class)}>{label}</h5>
 )
