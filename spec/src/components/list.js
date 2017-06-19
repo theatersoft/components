@@ -1,5 +1,5 @@
 import {h, Component} from 'preact'
-import {List, Subheader, ListItem, Switch} from '@theatersoft/components'
+import {List, Subheader, ListItem, NestedList, Switch} from '@theatersoft/components'
 
 export default class extends Component {
     render (_, {sw}) {
@@ -13,6 +13,11 @@ export default class extends Component {
                     <ListItem icon="cross" label="Item with icon and child" onClick={toggle}>
                         <Switch checked={sw} onChange={toggle}/>
                     </ListItem>
+                    <NestedList label="Nested list">
+                        <ListItem label="One"/>
+                        <ListItem label="Two"/>
+                        <ListItem label="Three"/>
+                    </NestedList>
                 </List>
             </section>
         )
