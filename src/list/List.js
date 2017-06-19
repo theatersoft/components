@@ -1,5 +1,5 @@
 import {h, Component} from 'preact'
-import {classes} from '..'
+import {classes} from '../'
 import style from './list.styl'
 
 export class List extends Component {

@@ -10,14 +10,14 @@ export default class extends Component {
                     <Subheader label="Subheader"/>
                     <ListItem label="Primary text"/>
                     <ListItem icon="cross" label="Item with left icon"/>
-                    <ListItem icon="cross" label="Item with icon and child" onClick={toggle}>
-                        <Switch checked={sw} onChange={toggle}/>
-                    </ListItem>
                     <NestedList label="Nested list">
                         <ListItem label="One"/>
                         <ListItem label="Two"/>
                         <ListItem label="Three"/>
                     </NestedList>
+                    <ListItem icon="cross" label="Item with icon and child" onClick={toggle}>
+                        <Switch checked={sw} onChange={toggle}/>
+                    </ListItem>
                 </List>
             </section>
         )

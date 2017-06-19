@@ -1,5 +1,5 @@
 import {h, Component} from 'preact'
-import {classes, Icon, Ripple} from '..'
+import {classes, Icon, Ripple} from '../'
 import style from './list.styl'
 
 const Action = vnode => {
