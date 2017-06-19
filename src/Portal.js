@@ -12,7 +12,7 @@ class PortalProvider extends Component {
     }
 }
 
-export default class extends Component {
+export class Portal extends Component {
     componentDidMount () {this.renderPortal()}
 
     componentDidUpdate () {this.renderPortal()}

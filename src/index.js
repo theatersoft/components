@@ -1,8 +1,8 @@
 import './index.styl'
 
 export {classes, mousePosition, touchPosition} from './utils'
-export {default as Activable} from './Activable'
-export {default as Portal} from './Portal'
+export {Activable} from './Activable'
+export {Portal} from './Portal'
 export {Overlay} from './overlay'
 export {Ripple} from './ripple'
 export {Icon} from './icon'

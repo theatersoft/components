@@ -1,6 +1,6 @@
 import {h, Component} from 'preact'
 
-export default ({delay = 500} = {}) => ActivableComponent => class extends Component {
+export const Activable = ({delay = 500} = {}) => ActivableComponent => class extends Component {
     static defaultProps = {delay}
 
     state = {active: this.props.active, rendered: this.props.active}
