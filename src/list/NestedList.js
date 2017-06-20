@@ -11,6 +11,15 @@ export const NestedList = Ripple({centered: false, isRipple: true})(class extend
 
     onClick = () => this.setState({active: !this.state.active})
 
+    componentDidUpdate () {
+        const {active} = this.state
+        if (active && this.list.base && this.list.base.getBoundingClientRect) {
+            const {height} = this.list.base.getBoundingClientRect()
+            this.list.base.parentElement.style.maxHeight = `${height}px`
+        } else if (this.list.base)
+            this.list.base.parentElement.style.maxHeight = '0'
+    }
+
     render ({icon, label, children, ...props}, {active}) {
         const
             ripples = children.filter(vnode => vnode.attributes.isRipple),
@@ -27,7 +36,7 @@ export const NestedList = Ripple({centered: false, isRipple: true})(class extend
                     {ripples}
                 </li>
                 <div class={classes(style.nested, active && style.active)}>
-                    <ActivableList active={active}>
+                    <ActivableList active={active} ref={ref => this.list = ref}>
                         {items}
                     </ActivableList>
                 </div>

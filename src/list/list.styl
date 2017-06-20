@@ -1,6 +1,7 @@
 @import base
 
 item-min-height = 10rem
+nest-duration = animation-duration * 2
 
 .list
     display inline-block
@@ -40,7 +41,6 @@ item-min-height = 10rem
 .nested
     max-height 0
     overflow hidden
-    transition max-height animation-duration animation-curve-default
+    transition max-height nest-duration animation-curve-default
     &.active
-        max-height 100rem
-        transition max-height animation-duration animation-curve-default
+        transition max-height nest-duration animation-curve-default
