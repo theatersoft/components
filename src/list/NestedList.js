@@ -1,5 +1,5 @@
 import {h, Component} from 'preact'
-import {classes, Icon, Ripple, Col, List, Activable} from '../'
+import {classes, Icon, Ripple, List, Activable} from '../'
 import style from './list.styl'
 
 const ActivableList = Activable()(List)
@@ -12,25 +12,26 @@ export const NestedList = Ripple({centered: false, isRipple: true})(class extend
     onClick = () => this.setState({active: !this.state.active})
 
     render ({icon, label, children, ...props}, {active}) {
+        const
+            ripples = children.filter(vnode => vnode.attributes.isRipple),
+            items = children.filter(vnode => !vnode.attributes.isRipple)
         return (
-            <Col>
-                <li
-                    class={classes(props.class, style.item)}
-                    onClick={this.onClick}
-                    {...props}
-                >
+            <div>
+                <li class={classes(props.class, style.item)} onClick={this.onClick} {...props}>
                     {icon && <Icon icon={icon} class={style.icon} small/>}
                     <span class={style.content}>
                         <span class={style.text}>
                             {label}
                         </span>
                     </span>
-                    {children && children.filter(vnode => vnode.attributes.isRipple)}
+                    {ripples}
                 </li>
-                {children && <ActivableList active={active}>
-                    {children.filter(vnode => !vnode.attributes.isRipple)}
-                </ActivableList>}
-            </Col>
+                <div class={classes(style.nested, active && style.active)}>
+                    <ActivableList active={active}>
+                        {items}
+                    </ActivableList>
+                </div>
+            </div>
         )
     }
 })

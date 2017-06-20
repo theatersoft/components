@@ -36,3 +36,11 @@ item-min-height = 10rem
     display flex
     flex 0 0 auto
     margin 2rem 0 2rem 2rem
+
+.nested
+    max-height 0
+    overflow hidden
+    transition max-height animation-duration animation-curve-default
+    &.active
+        max-height 100rem
+        transition max-height animation-duration animation-curve-default
