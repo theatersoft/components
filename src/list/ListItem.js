@@ -24,7 +24,7 @@ export const ListItem = Ripple({centered: false, isRipple: true})(class extends 
                         {label}
                     </span>
                 </span>
-                {children && children.map(vnode => !vnode.attributes.isRipple ? Action(vnode) : vnode)}
+                {children && children.map(vnode => vnode && !vnode.attributes.isRipple ? Action(vnode) : vnode)}
             </li>
         )
     }
