@@ -1,22 +1,22 @@
 @import base
 
+start-diameter = 38rem
+end-diameter = 56rem
+
 .field
     width 100%
     height 100%
     position absolute
-
-group-start-size = 38rem
-group-end-size = 56rem
 
 .group
     position fixed
     display grid
     grid-auto-rows 33.33%
     grid-auto-columns 33.33%
-    width group-start-size
-    height group-start-size
-    margin-left (group-start-size / -2)
-    margin-top (group-start-size / -2)
+    width start-diameter
+    height start-diameter
+    margin-left (start-diameter / -2)
+    margin-top (start-diameter / -2)
     opacity 0
     transition-property opacity, width, height, margin-left, margin-top
     transition-duration animation-duration
@@ -25,10 +25,10 @@ group-end-size = 56rem
     &.active
         transition all animation-duration animation-curve-default
         opacity 1
-        width group-end-size
-        height group-end-size
-        margin-left (group-end-size / -2)
-        margin-top (group-end-size / -2)
+        width end-diameter
+        height end-diameter
+        margin-left (end-diameter / -2)
+        margin-top (end-diameter / -2)
         pointer-events all
 
 .ring
