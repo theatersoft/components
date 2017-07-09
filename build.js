@@ -10,7 +10,6 @@ const
     writeJson = (file, json) => fs.writeFileSync(file, JSON.stringify(json, null, '  '), 'utf-8'),
     copyright = `/*\n${fs.readFileSync('COPYRIGHT', 'utf8')}\n */`,
     {rollup} = require('rollup'),
-    commonjs = require('rollup-plugin-commonjs'),
     nodeResolve = require('rollup-plugin-node-resolve'),
     babel = require('rollup-plugin-babel')({
         babelrc: false,
@@ -94,16 +93,7 @@ const targets = {
                     getExport: id => cssExportMap[id]
                 }),
                 nodeResolve({
-                    jsnext: true,
-                    module: true,
-                    //browser: true, // https://github.com/rollup/rollup-plugin-node-resolve/issues/55
-                    main: true,
-                }),
-                commonjs({
-                    include: [
-                        'node_modules/**',
-                        //'src/**'
-                    ]
+                    module: true
                 }),
                 sourcemaps(),
                 babel
