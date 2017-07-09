@@ -4,3 +4,4 @@
 node_modules
 .idea
 /remotedev-db.sqlite3
+/package-lock.json
