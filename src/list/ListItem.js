@@ -8,7 +8,7 @@ const Action = vnode => {
     //stopRipple = onClick && !onMouseDown
         stop = e => e.stopPropagation()
     return (
-        <span class={style.action} onMouseDown={stop}>
+        <span class={style.action} onMouseDown={stop} onClick={stop}>
             {vnode}
         </span>
     )

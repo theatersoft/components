@@ -8,7 +8,7 @@ export const Switch = class extends Component {
         if (!this.props.disabled && this.props.onChange) {
             this.props.onChange(!this.props.checked, e)
         }
-        //e.stopPropagation()
+        e.stopPropagation()
     }
 
     render ({class: _class, label, checked = false, disabled = false, onChange, ...props}) {
