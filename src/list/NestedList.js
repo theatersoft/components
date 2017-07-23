@@ -22,8 +22,8 @@ export const NestedList = Ripple({centered: false, isRipple: true})(class extend
 
     render ({icon, label, children, ...props}, {active}) {
         const
-            ripples = children.filter(vnode => vnode.attributes.isRipple),
-            items = children.filter(vnode => !vnode.attributes.isRipple)
+            ripples = children.filter(vnode => vnode.attributes && vnode.attributes.isRipple),
+            items = children.filter(vnode => !vnode.attributes || !vnode.attributes.isRipple)
         return (
             <div>
                 <li class={classes(props.class, style.item)} onClick={this.onClick} {...props}>
