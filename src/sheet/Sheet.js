@@ -16,7 +16,7 @@ class Sheet extends Component {
         return (
             <Portal class={style.wrapper}>
                 <div class={style.overlay} onClick={this.onClick}/>
-                    <section class={classes(style.sheet, style[type], active && style.active, _class)}>
+                <section class={classes(style.sheet, style[type], active && style.active, _class)}>
                     {children}
                 </section>
             </Portal>
