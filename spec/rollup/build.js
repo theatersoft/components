@@ -5,7 +5,6 @@ const
     fs = require('fs'),
     {rollup} = require('rollup'),
     babel = require('rollup-plugin-babel'),
-    commonjs = require('rollup-plugin-commonjs'),
     nodeResolve = require('rollup-plugin-node-resolve'),
     replace = require('rollup-plugin-replace'),
     sourcemaps = require('rollup-plugin-sourcemaps'),
@@ -55,6 +54,7 @@ const
             string({include: '/**/*.svg'}),
             //sourcemaps(),
             babel({
+                babelrc: false,
                 exclude: ['node_modules/**', '/**/*.svg'],
                 plugins: [
                     [require("babel-plugin-transform-object-rest-spread"), {useBuiltIns: true}],
