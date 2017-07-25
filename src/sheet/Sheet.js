@@ -13,7 +13,6 @@ class Sheet extends Component {
     }
 
     render ({class: _class, active, onClick, type, children, index}) {
-        console.log(children)
         return (
             <Portal class={style.wrapper}>
                 <div class={style.overlay} onClick={this.onClick}/>
