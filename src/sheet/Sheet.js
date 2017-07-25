@@ -12,13 +12,23 @@ class Sheet extends Component {
         if (this.props.onClick) this.props.onClick(e)
     }
 
-    render ({class: _class, active, onClick, type, children}) {
+    render ({class: _class, active, onClick, type, children, index}) {
+        console.log(children)
         return (
             <Portal class={style.wrapper}>
                 <div class={style.overlay} onClick={this.onClick}/>
-                <section class={classes(style.sheet, style[type], active && style.active, _class)}>
-                    {children}
-                </section>
+                {index === undefined
+                    ?
+                    <section class={classes(style.sheet, style[type], active && style.active, _class)}>
+                        {children}
+                    </section>
+                    :
+                    children.map((child, i) =>
+                        <section
+                            class={classes(style.sheet, style[type], i <= index && active && style.active, i < index && style.deactive, _class)}>
+                            {[child]}
+                        </section>
+                    )}
             </Portal>
         )
     }

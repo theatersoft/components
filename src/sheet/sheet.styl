@@ -31,6 +31,14 @@ width = w(80)
         top (100 - height)
     &.active.top, &.active.bottom
         transform translateY(0)
+    &.deactive.top, &.deactive.bottom
+        transition-property opacity, transform
+        opacity 0
+        pointer-events none
+    &.deactive.top
+        transform translateY(height)
+    &.deactive.bottom
+        transform translateY(0 - height)
     &.left, &.right
         height 100%
         overflow-x hidden
@@ -45,3 +53,13 @@ width = w(80)
         left (w(100) - width)
     &.active.left, &.active.right
         transform translateX(0)
+        transition-property opacity, transform
+        opacity 100
+    &.deactive.left, &.deactive.right
+        transition-property opacity, transform
+        opacity 0
+        pointer-events none
+    &.deactive.left
+        transform translateX(width)
+    &.deactive.right
+        transform translateX(0 - width)

@@ -2,9 +2,13 @@ import {h, Component} from 'preact'
 import {Button, Sheet} from '@theatersoft/components'
 
 export default class extends Component {
-    state = {active: false, next: false}
+    state = {active: false, index: 0}
 
-    render (_, {active, type, next}) {
+    next = () => this.setState({index: this.state.index + 1})
+
+    back = () => this.setState({index: this.state.index - 1})
+
+    render (_, {active, type, index}) {
         return (
             <section>
                 <p>sheet</p>
@@ -15,12 +19,25 @@ export default class extends Component {
                     <Button label="Bottom" raised primary
                             onClick={() => this.setState({active: true, type: 'bottom'})}/>
                 </nav>
-                <Sheet active={active} type={type} onClick={() => this.setState({active: false, next: false})}>
-                    {next ? <p>next content</p> : [
-                        <p>content</p>,
-                        < Button label="Next" raised primary
-                                 onClick={() => this.setState({active: true, type: 'left', next: true})}/>
-                    ]}
+                <Sheet
+                    active={active}
+                    type={type}
+                    index={index}
+                    onClick={() => this.setState({active: false})}
+                >
+                    <div>
+                        <p>First content</p>
+                        < Button label="Next" raised primary onClick={this.next}/>
+                    </div>
+                    <div>
+                        <p>Second content</p>
+                        < Button label="Back" raised primary onClick={this.back}/>
+                        < Button label="Next" raised primary onClick={this.next}/>
+                    </div>
+                    <div>
+                        <p>Third content</p>
+                        < Button label="Back" raised primary onClick={this.back}/>
+                    </div>
                 </Sheet>
             </section>
         )
