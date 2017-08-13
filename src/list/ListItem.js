@@ -4,8 +4,6 @@ import style from './list.styl'
 
 const Action = vnode => {
     const
-    //{onClick, onMouseDown} = vnode.attributes,
-    //stopRipple = onClick && !onMouseDown
         stop = e => e.stopPropagation()
     return (
         <span class={style.action} onMouseDown={stop} onClick={stop}>
