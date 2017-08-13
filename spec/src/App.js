@@ -11,7 +11,7 @@ import style from './App.styl'
 
 export default () => (
     h('div', {class: style.app}
-        ,<Sheet/>
+        //,<Sheet/>
         //,<Dialog/>
         //,<Snackbar/>
         ,<List/>

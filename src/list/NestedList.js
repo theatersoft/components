@@ -7,13 +7,9 @@ const ActivableList = Activable()(List)
 export const NestedList = Ripple({centered: false, isRipple: true})(class extends Component {
     static defaultProps = {active: false}
 
-    state = {active: false, activate: this.props.active}
+    state = {active: this.props.active}
 
     onClick = () => this.setState({active: !this.state.active})
-
-    componentDidMount () {
-        if (this.state.activate) this.setState({active: true})
-    }
 
     componentDidUpdate () {
         const {active} = this.state
