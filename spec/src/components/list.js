@@ -15,6 +15,11 @@ export default class extends Component {
                         <ListItem label="Two"/>
                         <ListItem label="Three"/>
                     </NestedList>
+                    <NestedList label="Active Nested list" active>
+                        <ListItem label="One"/>
+                        <ListItem label="Two"/>
+                        <ListItem label="Three"/>
+                    </NestedList>
                     <ListItem icon="cross" label="Item with icon and child" onClick={toggle}>
                         <Switch checked={sw} onChange={toggle}/>
                     </ListItem>

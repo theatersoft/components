@@ -14,7 +14,7 @@ export default () => (
         ,<Sheet/>
         //,<Dialog/>
         //,<Snackbar/>
-        //,<List/>
+        ,<List/>
         //,<TapMenu/>
         //,<Switch/>
         //,<Icon/>
