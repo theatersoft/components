@@ -45,6 +45,7 @@ const
     postcss = require('rollup-plugin-postcss'),
     stylus = require('stylus'),
     postcssModules = require('postcss-modules'),
+    cssnano = require('cssnano'),
     cssExportMap = {}
 
 const targets = {
@@ -82,13 +83,14 @@ const targets = {
                         )
                     }),
                     extensions: ['.styl'],
-                    sourceMap: true, // true, "inline" or false
+                    sourceMap: !DIST, // true, "inline" or false
                     extract: `dist/${name}.css`,
                     plugins: [
                         postcssModules({
                             getJSON(id, exportTokens) {cssExportMap[id] = exportTokens},
-                            generateScopedName: '_[name]_[local]', // _[hash:2]
-                        })
+                            generateScopedName: DIST ? '[hash:5]' : '_[name]_[local]'
+                        }),
+                        ...(DIST ? [cssnano()] : [])
                     ],
                     getExport: id => cssExportMap[id]
                 }),
