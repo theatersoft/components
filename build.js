@@ -90,7 +90,7 @@ const targets = {
                             getJSON(id, exportTokens) {cssExportMap[id] = exportTokens},
                             generateScopedName: DIST ? '[hash:5]' : '_[name]_[local]'
                         }),
-                        ...(DIST ? [cssnano()] : [])
+                        ...(DIST ? [cssnano({discardUnused: false})] : [])
                     ],
                     getExport: id => cssExportMap[id]
                 }),
