@@ -17,7 +17,7 @@
     "serve-static": "^1.12.2"
   },
   "scripts": {
-    "link": "npm link @theatersoft/bus @theatersoft/components",
+    "link": "npm link @theatersoft/bus @theatersoft/components && cd .. && npm run link",
     "build": "node build.js",
     "start": "node build.js watch & http-server -c-1 & wait"
   }
