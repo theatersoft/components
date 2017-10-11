@@ -7,6 +7,7 @@ import List from './components/list'
 import Snackbar from './components/snackbar'
 import Sheet from './components/sheet'
 import Switch from './components/switch'
+import Slider from './components/slider'
 import style from './App.styl'
 
 export default () => (
@@ -14,9 +15,10 @@ export default () => (
         //,<Sheet/>
         //,<Dialog/>
         //,<Snackbar/>
-        ,<List/>
+        //,<List/>
         //,<TapMenu/>
-        //,<Switch/>
+        ,<Switch/>
+        ,<Slider/>
         //,<Icon/>
         //,<Button/>
         //,<Button light/>
