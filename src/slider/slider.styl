@@ -1,0 +1,39 @@
+@import base
+
+thumb-size = 6rem
+
+.slider
+    position relative
+    width 100%
+    height 12rem
+    cursor pointer
+
+.trackC
+    position absolute
+    top 50%
+    width 100%
+    height 1rem
+    background-color palette-grey-50
+    //overflow hidden
+.track
+    background-color color-accent
+    position absolute
+    width 100%
+    height 100%
+    transform-origin left top
+    will-change transform
+
+.thumbC
+    position absolute
+    top 15px
+    left 0
+    user-select none
+    will-change transform
+.thumb
+    width thumb-size
+    height thumb-size
+    fill color-accent
+    position absolute
+    top 0
+    left 0
+
