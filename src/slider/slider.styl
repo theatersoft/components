@@ -4,17 +4,18 @@ thumb-size = 6rem
 
 .slider
     position relative
-    width 100%
+    width 'calc(100% - %s)' % thumb-size
+    margin-right thumb-size
     height 12rem
     cursor pointer
 
 .trackC
     position absolute
     top 50%
+    left (thumb-size / 2)
     width 100%
     height 1rem
     background-color palette-grey-50
-    //overflow hidden
 .track
     background-color color-accent
     position absolute
@@ -32,7 +33,8 @@ thumb-size = 6rem
 .thumb
     width thumb-size
     height thumb-size
-    fill color-accent
+    background-color color-accent
+    border-radius 50%
     position absolute
     top 0
     left 0
