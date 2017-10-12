@@ -10,11 +10,14 @@ export const Slider = class extends Component {
         this.resize()
     }
 
+    componentWillUnmount () {
+        window.removeEventListener('resize', this.resize)
+    }
+
     // trackC
 
     resize = e => {
         const {left, width} = this.trackC.getBoundingClientRect()
-        console.log(this.trackC.getBoundingClientRect())
         this.setState({left, width})
     }
 
