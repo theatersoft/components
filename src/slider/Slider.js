@@ -3,7 +3,7 @@ import {classes} from '../'
 import style from './slider.styl'
 
 export const Slider = class extends Component {
-    static defaultProps = {min: 0, max: 100}
+    static defaultProps = {min: 0, max: 100, step: 1}
 
     componentDidMount () {
         window.addEventListener('resize', this.resize)
@@ -57,8 +57,9 @@ export const Slider = class extends Component {
         const
             {left, width} = this.state,
             {max, min, step} = this.props,
-            val = ((x - left) / width) * (max - min) // TODO step
-        return val + min
+            val = ((x - left) / width) * (max - min),
+            clamp = v => v < min ? min : v > max ? max : v
+        return clamp(Math.round(val / step) * step + min)
     }
 
     refTrackC = node => this.trackC = node
