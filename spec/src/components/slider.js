@@ -1,5 +1,5 @@
 import {h, Component} from 'preact'
-import {Slider} from '@theatersoft/components'
+import {Slider, Row} from '@theatersoft/components'
 
 export default class extends Component {
     state = {value: 25}
@@ -11,6 +11,9 @@ export default class extends Component {
             <section>
                 <span>{value}</span>
                 <Slider value={value} onChange={this.onChange}/>
+                <Row>
+                    <Slider value={value} onChange={this.onChange}/>
+                </Row>
             </section>
         )
     }

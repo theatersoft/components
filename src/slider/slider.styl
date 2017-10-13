@@ -1,16 +1,17 @@
 @import base
 
 slider-height = 8rem
+slider-min-width = 10rem
 thumb-size = 6rem
-track-height = 1rem
+track-height = 2rem
 
 .slider
     position relative
     width 'calc(100% - %s)' % thumb-size
     margin-right thumb-size
     height slider-height
+    min-width slider-min-width
     cursor pointer
-    min-width (3 * thumb-size)
 
 .trackC
     position absolute
@@ -18,13 +19,15 @@ track-height = 1rem
     left (thumb-size / 2)
     width 100%
     height track-height
+    border-radius (track-height / 2)
     background-color palette-grey-50
+    overflow hidden
 .track
     background-color color-accent
     position absolute
     width 100%
-    height (track-height * 1.1)
-    transform-origin left top
+    height 100%
+    transform-origin left
     will-change transform
 
 .thumbC
