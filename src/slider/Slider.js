@@ -64,7 +64,7 @@ export const Slider = class extends Component {
 
     refTrackC = node => this.trackC = node
 
-    render ({value, min, max, onChange, class: _class}, {left, width}) {
+    render ({value, min, max, class: _class}, {left, width}) {
         const
             scaled = (value - min) / (max - min)
         return (

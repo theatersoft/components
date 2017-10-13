@@ -5,9 +5,7 @@ import style from './switch.styl'
 
 export const Switch = class extends Component {
     onClick = e => {
-        if (!this.props.disabled && this.props.onChange) {
-            this.props.onChange(!this.props.checked, e)
-        }
+        this.props.onChange(!this.props.checked, e)
         e.stopPropagation()
     }
 
@@ -19,7 +17,7 @@ export const Switch = class extends Component {
                     type="checkbox"
                     checked={checked}
                     class={style.input}
-                    onClick={this.onClick}
+                    onClick={!disabled && onChange && this.onClick}
                 />
                 <span class={checked ? style.on : style.off}>
                     <Thumb disabled={disabled}/>
