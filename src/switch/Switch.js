@@ -4,26 +4,21 @@ import Thumb from './Thumb.js'
 import style from './switch.styl'
 
 export const Switch = class extends Component {
-    onClick = e => {
+    click = e => {
         this.props.onChange(!this.props.checked, e)
         e.stopPropagation()
     }
 
-    render ({class: _class, label, checked = false, disabled = false, onChange, ...props}) {
+    render ({class: _class, checked = false, disabled = false, onChange, ...props}) {
         return (
-            <label class={classes(_class, disabled ? style.disabled : style.field)}>
-                <input
-                    {...props}
-                    type="checkbox"
-                    checked={checked}
-                    class={style.input}
-                    onClick={!disabled && onChange && this.onClick}
-                />
+            <div class={classes(style.switch, disabled && style.disabled, _class)}
+                 onclick={!disabled && onChange && this.click}
+                {...props}>
+                <input class={style.input} type="checkbox" checked={checked}/>
                 <span class={checked ? style.on : style.off}>
                     <Thumb disabled={disabled}/>
                 </span>
-                {label && <span>{label}</span>}
-            </label>
+            </div>
         )
     }
 }

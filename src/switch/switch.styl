@@ -16,7 +16,7 @@ focus-init-size = .8 * unit
 ripple-duration = 550ms
 field-margin-bottom = 1.5 * unit
 
-.field
+.switch
     position relative
     display block
     white-space nowrap
@@ -28,7 +28,7 @@ field-margin-bottom = 1.5 * unit
     overflow hidden
     width 0
 
-switch()
+track()
     position relative
     display inline-block
     width track-length
@@ -63,14 +63,14 @@ thumb-focus()
     & :global .rippleWrapper
         overflow visible
 .on
-    switch()
+    track()
     background track-on-color
     .thumb
         left track-length - thumb-size
         background thumb-on-color
 
 .off
-    switch()
+    track()
     background track-off-color
     .thumb
         left 0
