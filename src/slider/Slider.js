@@ -75,7 +75,7 @@ export const Slider = class extends Component {
                 <div class={style.thumbC}
                      style={{transform: `translateX(${scaled * width}px)`}}
                      onMouseDown={this.mouseDown}>
-                    <div class={style.thumb}/>
+                    <div class={classes(style.thumb, value === min && style.zero)}/>
                 </div>
             </div>
         )
