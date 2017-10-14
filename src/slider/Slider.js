@@ -69,13 +69,11 @@ export const Slider = class extends Component {
             value = pressed ? b : a,
             scaled = (value - min) / (max - min)
         return (
-            <div class={classes(style.slider, _class)}>
+            <div class={classes(style.slider, _class)} onMouseDown={this.mouseDown}>
                 <div class={style.trackC} ref={this.refTrackC}>
                     <div class={style.track} style={{transform: `scaleX(${scaled})`}}/>
                 </div>
-                <div class={style.thumbC}
-                     style={{transform: `translateX(${scaled * width}px)`}}
-                     onMouseDown={this.mouseDown}>
+                <div class={style.thumbC} style={{transform: `translateX(${scaled * width}px)`}}>
                     <div class={classes(style.thumb, value === min && style.zero)}/>
                 </div>
             </div>
