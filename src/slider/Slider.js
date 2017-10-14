@@ -39,18 +39,18 @@ export const Slider = class extends Component {
 
     start (x) {
         this.resize(undefined, () => {
-            this.setState({pressed: true})
-            this.props.onChange(this.value(x))
+            this.setState({pressed: true, value: this.value(x)})
         })
     }
 
     move (x) {
         const value = this.value(x)
-        if (value !== this.props.value) this.props.onChange(value)
+        if (value !== this.state.value) this.setState({value: this.value(x)})
     }
 
     end () {
-        this.setState({pressed: false})
+        this.setState({pressed: false}) // todo released state pending prop update
+        if (this.state.value !== this.props.value) this.props.onChange(this.state.value)
     }
 
     value (x) {
@@ -64,8 +64,9 @@ export const Slider = class extends Component {
 
     refTrackC = node => this.trackC = node
 
-    render ({value, min, max, class: _class}, {left, width}) {
+    render ({value: a, min, max, class: _class}, {left, width, pressed, value: b}) {
         const
+            value = pressed ? b : a,
             scaled = (value - min) / (max - min)
         return (
             <div class={classes(style.slider, _class)}>
