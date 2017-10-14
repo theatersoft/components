@@ -11,7 +11,7 @@ export const Switch = class extends Component {
 
     render ({class: _class, checked = false, disabled = false, onChange, ...props}) {
         return (
-            <div class={classes(style.switch, disabled && style.disabled, _class)}
+            <div class={classes(style._switch, disabled && style.disabled, _class)}
                  onclick={!disabled && onChange && this.click}
                 {...props}>
                 <input class={style.input} type="checkbox" checked={checked}/>
