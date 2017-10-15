@@ -1,6 +1,10 @@
 import {h, Component} from 'preact'
-import {classes} from '../'
+import {Ripple, classes} from '../'
 import style from './slider.styl'
+
+const RippleDiv = Ripple({centered: false, spread: 3.15, multiple: false})(props =>
+    <div {...props}></div>
+)
 
 export const Slider = class extends Component {
     static defaultProps = {min: 0, max: 100, step: 1}
@@ -64,19 +68,20 @@ export const Slider = class extends Component {
 
     refTrackC = node => this.trackC = node
 
-    render ({value: a, min, max, class: _class}, {left, width, pressed, value: b}) {
+    render ({value: a, min, max, class: _class, ...props}, {left, width, pressed, value: b}) {
         const
             value = pressed ? b : a,
             scaled = (value - min) / (max - min)
         return (
-            <div class={classes(style.slider, _class)} onMouseDown={this.mouseDown}>
+            <RippleDiv class={classes(style.slider, value === min && style.zero, _class)}
+                       onMouseDown={this.mouseDown} {...props}>
                 <div class={style.trackC} ref={this.refTrackC}>
                     <div class={style.track} style={{transform: `scaleX(${scaled})`}}/>
                 </div>
                 <div class={style.thumbC} style={{transform: `translateX(${scaled * width}px)`}}>
-                    <div class={classes(style.thumb, value === min && style.zero)}/>
+                    <div class={classes(style.thumb)}/>
                 </div>
-            </div>
+            </RippleDiv>
         )
     }
 }
