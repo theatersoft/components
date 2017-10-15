@@ -49,7 +49,7 @@ export default ({centered = false, class: _class, multiple = true, scaled = true
                         return {
                             left: centered ? 0 : x - left - width / 2,
                             top: centered ? 0 : y - top - height / 2,
-                            diameter: spread * (scaled ? width : 1)
+                            diameter: spread * (scaled ? Math.min(width, height) : 1)
                         }
                     }
                 if (rippleShouldTrigger(isTouch)) {
