@@ -14,7 +14,6 @@ export const Switch = class extends Component {
             <div class={classes(style._switch, disabled && style.disabled, _class)}
                  onclick={!disabled && onChange && this.click}
                 {...props}>
-                <input class={style.input} type="checkbox" checked={checked}/>
                 <span class={checked ? style.on : style.off}>
                     <Thumb disabled={disabled}/>
                 </span>

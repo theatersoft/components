@@ -3,7 +3,6 @@ import {Switch} from '@theatersoft/components'
 
 export default class extends Component {
     onChange = (value, e) => {
-        console.log(e, e.currentTarget.dataset.id)
         this.setState({value})
     }
 
