@@ -57,7 +57,7 @@ export default ({centered = false, class: _class, multiple = true, scaled = true
                         inactive = Object.keys(this.state.ripples).length === 0,
                         key = multiple || inactive ? getNextKey() : this.currentKey,
                         started = executor(),
-                        eventTypes = isTouch ? ['touchend', 'touchmove'] : ['mouseup'],
+                        eventTypes = isTouch ? ['touchend', 'touchmove'] : ['mouseup', 'mousemove'],
                         endRipple = () => {
                             for (const type of eventTypes) document.removeEventListener(type, endRipple)
                             started.promise.then(() => this.setState({
