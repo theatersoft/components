@@ -83,13 +83,13 @@ export default ({centered = false, class: _class, multiple = true, scaled = true
                 }
             },
             renderRipple = (key, _class, {active, restarting, top, left, diameter}) =>
-                <span key={key} class={style.rippleWrapper || "rippleWrapper"} {...props}>
-                    <span
+                <div key={key} class={style.rippleWrapper || "rippleWrapper"} {...props}>
+                    <div
                         class={classes(style.ripple, {[style.rippleActive]: active, [style.rippleRestarting]: restarting}, _class)}
                         style={{transform: `translate3d(${-diameter / 2 + left}px, ${-diameter / 2 + top}px, 0) scale(${restarting ? 0 : 1})`, width: diameter, height: diameter}}
                         ref={node => {if (node) this.rippleNodes[key] = node}}
                     />
-                </span>,
+                </div>,
             onMouseDown = e => {
                 if (this.props.onMouseDown) this.props.onMouseDown(e)
                 animateRipple(...mousePosition(e), false)
@@ -99,8 +99,13 @@ export default ({centered = false, class: _class, multiple = true, scaled = true
                 animateRipple(...touchPosition(e), true)
             }
         return h(ComposedComponent,
-            {...ripple && !disabled && {onMouseDown, onTouchStart}, disabled, ...other},
-            [children, Object.entries(ripples).map(([k, v]) => renderRipple(k, _class, v))]
+            {
+                ...other,
+                ...ripple && !disabled && {onMouseDown, onTouchStart},
+                disabled
+            },
+            children,
+            Object.entries(ripples).map(([k, v]) => renderRipple(k, _class, v))
         )
     }
 }
