@@ -2,7 +2,7 @@ import {h, Component} from 'preact'
 import {Ripple, classes} from '../'
 import style from './slider.styl'
 
-const RippleDiv = Ripple({centered: false, spread: 3.15, multiple: false})(props =>
+const RippleDiv = Ripple({centered: false, spread: 2.5, multiple: false})(props =>
     <div {...props}></div>
 )
 
