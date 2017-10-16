@@ -18,6 +18,8 @@ export const Slider = class extends Component {
         window.removeEventListener('resize', this.resize)
         document.removeEventListener('mousemove', this.mouseMove)
         document.removeEventListener('mouseup', this.mouseUp)
+        document.removeEventListener('touchmove', this.touchMove)
+        document.removeEventListener('touchend', this.touchEnd)
     }
 
     resize = (e, cb) => {
@@ -39,6 +41,26 @@ export const Slider = class extends Component {
         document.removeEventListener('mousemove', this.mouseMove)
         document.removeEventListener('mouseup', this.mouseUp)
         this.end()
+    }
+
+    touchStart = e => {
+        document.addEventListener('touchmove', this.touchMove)
+        document.addEventListener('touchend', this.touchEnd)
+        this.start(e.touches[0].pageX)
+    }
+
+    touchMove = e => {
+        this.move(e.touches[0].pageX)
+    }
+
+    touchEnd = e => {
+        document.removeEventListener('touchmove', this.touchMove)
+        document.removeEventListener('touchend', this.touchEnd)
+        this.end()
+    }
+
+    onGesture = e => {
+        console.log('Slider.onGesture', e)
     }
 
     start (x) {
@@ -74,7 +96,7 @@ export const Slider = class extends Component {
             scaled = (value - min) / (max - min)
         return (
             <RippleDiv class={classes(style.slider, value === min && style.zero, _class)}
-                       onMouseDown={this.mouseDown} {...props}>
+                       onMouseDown={this.mouseDown} onTouchStart={this.touchStart} {...props}>
                 <div class={style.trackC} ref={this.refTrackC}>
                     <div class={style.track} style={{transform: `scaleX(${scaled})`}}/>
                 </div>
