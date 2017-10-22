@@ -2,15 +2,9 @@ import {h, Component} from 'preact'
 import {classes, Icon, Ripple} from '../'
 import style from './list.styl'
 
-const Action = vnode => {
-    const
-        stop = e => e.stopPropagation()
-    return (
-        <span class={style.action} onMouseDown={stop} onClick={stop}>
-            {vnode}
-        </span>
-    )
-}
+const
+    stop = e => e.stopPropagation(),
+    Action = vnode => <span class={style.action} onMouseDown={stop} onClick={stop}>{vnode}</span>
 
 export const ListItem = Ripple({centered: false, isRipple: true})(class extends Component {
     render ({icon, label, children, ...props}) {
