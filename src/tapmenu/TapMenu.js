@@ -35,7 +35,7 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
     }
 
     onMouseDown = e => {
-        if (!this.state.active) {
+        if (!this.state.active && !this.context.focus) {
             if (!e.defaultPrevented) this.activate(...mousePosition(e))
             this.props.onMouseDown(e)
         }
@@ -75,12 +75,23 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
         }
     }
 
+    onGesture = e => {
+        const {type} = e
+        //log('TapMenu.onGesture', type, e)
+        if (!this.state.active && (type === 'press' || type === 'tap')) {
+            this.activate(...mousePosition(e.srcEvent))
+            this.props.onMouseDown(e.srcEvent)
+        }
+    }
+
     componentDidMount = () => {
         this.props.onRef && this.props.onRef(this)
+        if (this.context.focus) this.context.focus.on('gesture', this.onGesture)
     }
 
     componentWillUnmount = () => {
         this.props.onRef && this.props.onRef(undefined)
+        if (this.context.focus) this.context.focus.off('gesture', this.onGesture)
     }
 
     render ({actions, children, ...props}, {active, left, top}) {
