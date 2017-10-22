@@ -12,14 +12,13 @@ export const Slider = class extends Component {
     componentDidMount () {
         window.addEventListener('resize', this.resize)
         this.resize()
+        this.container = this.base
     }
 
     componentWillUnmount () {
         window.removeEventListener('resize', this.resize)
-        document.removeEventListener('mousemove', this.mouseMove)
-        document.removeEventListener('mouseup', this.mouseUp)
-        document.removeEventListener('touchmove', this.touchMove)
-        document.removeEventListener('touchend', this.touchEnd)
+        this.container.removeEventListener('pointermove', this.pointerMove)
+        this.container.removeEventListener('pointerup', this.pointerUp)
     }
 
     resize = (e, cb) => {
@@ -27,56 +26,32 @@ export const Slider = class extends Component {
         this.setState({left, width}, cb)
     }
 
-    mouseDown = e => {
-        document.addEventListener('mousemove', this.mouseMove)
-        document.addEventListener('mouseup', this.mouseUp)
-        this.start(e.pageX)
+    pointerDown = e => {
+        console.log('Slider.pointerDown', e)
+        e.stopPropagation()
+        this.container.addEventListener('pointermove', this.pointerMove)
+        this.container.addEventListener('pointerup', this.pointerUp)
+        this.resize(undefined, () => {
+            this.setState({pressed: true, value: this.value(e.pageX)})
+        })
     }
 
-    mouseMove = e => {
-        this.move(e.pageX)
+    pointerMove = e => {
+        console.log('Slider.pointerMove', e)
+        const value = this.value(e.pageX)
+        if (value !== this.state.value) this.setState({value})
     }
 
-    mouseUp = e => {
-        document.removeEventListener('mousemove', this.mouseMove)
-        document.removeEventListener('mouseup', this.mouseUp)
-        this.end()
-    }
-
-    touchStart = e => {
-        document.addEventListener('touchmove', this.touchMove)
-        document.addEventListener('touchend', this.touchEnd)
-        this.start(e.touches[0].pageX)
-    }
-
-    touchMove = e => {
-        this.move(e.touches[0].pageX)
-    }
-
-    touchEnd = e => {
-        document.removeEventListener('touchmove', this.touchMove)
-        document.removeEventListener('touchend', this.touchEnd)
-        this.end()
+    pointerUp = e => {
+        console.log('Slider.pointerUp', e)
+        this.container.removeEventListener('pointermove', this.pointerMove)
+        this.container.removeEventListener('pointerup', this.pointerUp)
+        this.setState({pressed: false}) // todo released state pending prop update
+        if (this.state.value !== this.props.value) this.props.onChange(this.state.value)
     }
 
     onGesture = e => {
         console.log('Slider.onGesture', e)
-    }
-
-    start (x) {
-        this.resize(undefined, () => {
-            this.setState({pressed: true, value: this.value(x)})
-        })
-    }
-
-    move (x) {
-        const value = this.value(x)
-        if (value !== this.state.value) this.setState({value: this.value(x)})
-    }
-
-    end () {
-        this.setState({pressed: false}) // todo released state pending prop update
-        if (this.state.value !== this.props.value) this.props.onChange(this.state.value)
     }
 
     value (x) {
@@ -91,12 +66,13 @@ export const Slider = class extends Component {
     refTrackC = node => this.trackC = node
 
     render ({value: a, min, max, class: _class, ...props}, {left, width, pressed, value: b}) {
+        console.log('render', {pressed, a, b})
         const
             value = pressed ? b : a,
             scaled = (value - min) / (max - min)
         return (
             <RippleDiv class={classes(style.slider, value === min && style.zero, _class)}
-                       onMouseDown={this.mouseDown} onTouchStart={this.touchStart} {...props}>
+                       onPointerDown={this.pointerDown} {...props}>
                 <div class={style.trackC} ref={this.refTrackC}>
                     <div class={style.track} style={{transform: `scaleX(${scaled})`}}/>
                 </div>
