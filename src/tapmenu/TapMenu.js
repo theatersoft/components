@@ -34,15 +34,11 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
         this.setState({active: false})
     }
 
-    onMouseDown = e => {
+    pointerDown = e => {
         if (!this.state.active && !this.context.focus) {
-            if (!e.defaultPrevented) this.activate(...mousePosition(e))
-            this.props.onMouseDown(e)
+            if (!e.defaultPrevented) this.activate(e.pageX, e.pageY)
+            this.props.onPointerDown(e)
         }
-    }
-
-    onTouchStart = e => {
-        //    props.onTouchStart(e)
     }
 
     onFieldClick = e => {
@@ -54,15 +50,12 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
         this.restartTimeout()
         switch (e.key) {
         case 'Escape':
-            if (this.state.active) {
-                this.deactivate()
-            }
+            if (this.state.active) this.deactivate()
             break
         case 'Enter':
         case 'NumpadEnter':
-            if (this.state.active) {
-                this.deactivate()
-            } else {
+            if (this.state.active) this.deactivate()
+            else {
                 const {left, top, height, width} = this.base.getBoundingClientRect()
                 this.activate(left + width / 2, top + height / 2)
             }
@@ -97,8 +90,7 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
     render ({actions, children, ...props}, {active, left, top}) {
         return (
             <div {...props} class={classes(style.field, props.class)}
-                            onMouseDown={this.onMouseDown}
-                            onTouchStart={this.onTouchStart}
+                            onPointerDown={this.pointerDown}
                             onClick={this.onFieldClick}>
                 <div class={classes(style.group, active && style.active)} style={{left, top}}>
                     <div class={style.ring}/>
