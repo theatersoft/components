@@ -37,7 +37,6 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
     pointerDown = e => {
         if (!this.state.active && !this.context.focus) {
             if (!e.defaultPrevented) this.activate(e.pageX, e.pageY)
-            this.props.onPointerDown(e)
         }
     }
 
@@ -70,10 +69,9 @@ export const TapMenu = Ripple({centered: false, scaled: false, spread: 100})(cla
 
     onGesture = e => {
         const {type} = e
-        //log('TapMenu.onGesture', type, e)
         if (!this.state.active && (type === 'press' || type === 'tap')) {
-            this.activate(...mousePosition(e.srcEvent))
-            if (this.props.onMouseDown) this.props.onMouseDown(e.srcEvent)
+            if (!e.srcEvent.defaultPrevented) this.activate(e.center.x, e.center.y)
+            if (this.props.onPointerDown && type === 'tap') this.props.onPointerDown(e.srcEvent)
         }
     }
 
