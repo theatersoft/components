@@ -12,7 +12,7 @@
     "build:dist": "DIST=true npm run build",
     "clean": "node build.js clean",
     "watch": "node build.js watch",
-    "link": "npm link @theatersoft/bus",
+    "link": "npm link --no-package-lock @theatersoft/bus",
     "publish": "node build.js publish"
   },
   "dist": {
@@ -20,7 +20,7 @@
     "main": "main.js",
     "module": "components.es.js",
     "scripts": {
-      "link": "npm link"
+      "link": "npm link --no-package-lock"
     }
   },
   "devDependencies": {
