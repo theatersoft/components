@@ -19,8 +19,8 @@ export default () => (
         //,<TapMenu/>
         ,<Switch/>
         ,<Slider/>
-        //,<Icon/>
-        //,<Button/>
+        ,<Icon/>
+        ,<Button/>
         //,<Button light/>
         //,<Button/>
     )
