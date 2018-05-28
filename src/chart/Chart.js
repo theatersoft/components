@@ -8,19 +8,23 @@ export class Chart extends Component {
         const {
             title,
             data,
-            type = 'bar',
+            type = 'line',
             onSelect,
+            lineOptions = {regionFill: 1, hideDots: 0, heatline: 0},
             ...rest
         } = this.props
-        this.c = new _Chart(this.chart, {title, data, type, is_navigable: !!onSelect, ...rest})
-        if (onSelect) this.c.parent.addEventListener('data-select', onSelect)
+        this.chart = new _Chart(this.parent, {
+            title, data, type, is_navigable: !!onSelect, lineOptions,
+            ...rest
+        })
+        if (onSelect) this.chart.parent.addEventListener('data-select', onSelect)
     }
 
     componentWillReceiveProps (props) {
-        this.c.update_values(props.data.datasets, props.data.labels)
+        this.chart.update_values(props.data.datasets, props.data.labels)
     }
 
-    ref = node => {this.chart = node}
+    ref = node => {this.parent = node}
 
     render ({class: _class}) {
         return <div class={classes(style.chart, _class)} ref={this.ref}/>
