@@ -8,6 +8,7 @@ import Snackbar from './components/snackbar'
 import Sheet from './components/sheet'
 import Switch from './components/switch'
 import Slider from './components/slider'
+import Chart from './components/chart'
 import style from './App.styl'
 
 export default () => (
@@ -17,11 +18,12 @@ export default () => (
         //,<Snackbar/>
         //,<List/>
         //,<TapMenu/>
-        ,<Switch/>
-        ,<Slider/>
-        ,<Icon/>
-        ,<Button/>
+        // ,<Switch/>
+        // ,<Slider/>
+        // ,<Icon/>
+        // ,<Button/>
         //,<Button light/>
         //,<Button/>
+        , <Chart/>
     )
 )
